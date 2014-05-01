@@ -1,11 +1,11 @@
 package com.example.projetannuelmobile;
 
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,6 +39,17 @@ public class MainActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
+
+	LocationManager  lmo  = (LocationManager)getSystemService(Context.LOCATION_SERVICE) ;
+	LocationListener llo  = new LocationManagerHelper(){
+		@Override
+		public void onLocationChanged(Location lc) {
+			super.onLocationChanged(lc) ; // On execute la méthode parente
+
+			latitude = LocationManagerHelper.getLatitude(); 
+			longitude = LocationManagerHelper.getLongitude(); 
+		}
+	};
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -47,22 +58,22 @@ public class MainActivity extends Activity implements OnClickListener {
 		{
 			case R.id.button1:
 				// instruction si on click sur le 1er bouton
-				//longitude = l.getLongitude();
-				//latitude = l.getLatitude();
-				//t = Toast.makeText(this, " 1er BOUTON \nLatitude : " + latitude + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
-				t = Toast.makeText(this, " 1er BOUTON ", Toast.LENGTH_LONG);
+				t = Toast.makeText(this, " 1er BOUTON \nLatitude : " + latitude + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
+				//t = Toast.makeText(this, " 1er BOUTON ", Toast.LENGTH_LONG);
 				t.show();
 				break;
 			case R.id.button2:
 				// instruction si on click sur le 2eme bouton
-				t = Toast.makeText(this, " 2eme BOUTON ", Toast.LENGTH_LONG);
+				t = Toast.makeText(this, " 2eme BOUTON \nLatitude : " + latitude + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
+				//t = Toast.makeText(this, " 2eme BOUTON ", Toast.LENGTH_LONG);
 				//longitude = location.getLongitude();
 				//latitude = location.getLatitude();
 				t.show();
 				break;
 			case R.id.button3:
 				// instruction si on click sur le 3eme bouton
-				t = Toast.makeText(this, " 3eme BOUTON ", Toast.LENGTH_LONG);
+				t = Toast.makeText(this, " 3eme BOUTON \nLatitude : " + latitude + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
+				//t = Toast.makeText(this, " 3eme BOUTON ", Toast.LENGTH_LONG);
 				//longitude = location.getLongitude();
 				//latitude = location.getLatitude();
 				t.show();
