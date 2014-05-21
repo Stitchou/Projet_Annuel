@@ -1,4 +1,4 @@
-package WarningComunity;
+package traitement;
 
 import java.io.FileReader ;
 import java.io.FileWriter ;
@@ -8,13 +8,13 @@ import java.io.PrintWriter;
 
 public class Logs {
 
-	public static void ecrire(String path, String text) 
+	public void ecrire(String path, String text) 
 	{
 		PrintWriter ecri ;
 		try
 		{
-			ecri = new PrintWriter(new FileWriter(path),true);
-			ecri.print(text);
+			ecri = new PrintWriter(new FileWriter(path,true));
+			ecri.print("\r\n"+text);
 			ecri.flush();
 			ecri.close();
 		}

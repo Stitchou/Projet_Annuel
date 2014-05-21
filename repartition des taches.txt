@@ -1,0 +1,16 @@
+Emerich
+- creation du depot 
+- rédaction de la documentation du périmètre fonctionnelle
+- rédaction du diagramme de package
+- rédaction des diagrammes de cas d'utilisation
+- rédaction des fiches descriptives des cas d'utilisation de la gestion des évènements
+- rédaction des diagrammes de séquences de chaque cas d'utilisation
+- création des packages de l'application lourde 
+
+
+
+yehouda
+
+
+
+Reda 
