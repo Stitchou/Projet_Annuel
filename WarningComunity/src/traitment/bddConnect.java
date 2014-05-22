@@ -34,7 +34,7 @@ public class bddConnect {
 	  this.root = "dbo412384129";
 	  this.pass = "yad2626yad";
 	  */
-	  this.connexion = "jdbc:mysql://localhost/sitepa";
+	  this.connexion = "jdbc:mysql://localhost/warning_comunity";
 	  this.root = "root";
 	  this.pass = "";
   }
@@ -54,7 +54,7 @@ public class bddConnect {
 	    c = DriverManager.getConnection(this.connexion, this.root, this.pass);
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		System.out.println(e);
 	}
 	  return c;
   }
