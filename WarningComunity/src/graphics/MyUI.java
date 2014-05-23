@@ -109,7 +109,7 @@ public class MyUI extends JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTabbedPane2.addTab("tab2", jScrollPane1);
+        jTabbedPane2.addTab("Logs", jScrollPane1);
 
        /* jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,7 +126,7 @@ public class MyUI extends JFrame {
         
         jScrollPane2.setViewportView(tableEvent);
 
-        jTabbedPane2.addTab("tab2", jScrollPane2);
+        jTabbedPane2.addTab("Events", jScrollPane2);
 
         jMenu1.setText("Fichier");
 
