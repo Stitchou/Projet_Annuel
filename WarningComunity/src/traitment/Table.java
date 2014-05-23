@@ -12,7 +12,8 @@ public class Table extends JTable {
 	public Table(TableModel tm)
 	{
 		super(tm);
-		
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 		switch(tm.getTableModelType())
 		{
 		case "event" :
@@ -28,12 +29,13 @@ public class Table extends JTable {
 	        
 	        
 	        //Alignement milieu sur toutes les colonnes
-	        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-	        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 	        for(int i =0; i<5;i++)
 	        	getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
 			break;
 		case "user" :
+			 //Alignement milieu sur toutes les colonnes
+	        for(int i =0; i<6;i++)
+	        	getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
 			break;
 		}
 		setFillsViewportHeight(true);
