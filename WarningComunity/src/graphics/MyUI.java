@@ -54,7 +54,7 @@ public class MyUI extends JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableEvent = new Table(new TableModel());
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -111,7 +111,7 @@ public class MyUI extends JFrame {
 
         jTabbedPane2.addTab("tab2", jScrollPane1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+       /* jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -121,8 +121,10 @@ public class MyUI extends JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ));*/
+        
+        
+        jScrollPane2.setViewportView(tableEvent);
 
         jTabbedPane2.addTab("tab2", jScrollPane2);
 
@@ -243,7 +245,7 @@ public class MyUI extends JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
+    private Table tableEvent;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
