@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import com.example.projetannuelmobile.Second;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
 import android.view.Menu;
@@ -16,6 +17,9 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity implements OnClickListener {
+	
+	private static final Context MainActivity = null;
+	Bundle objetbunble = new Bundle();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +51,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		Toast t = null;
 		t = Toast.makeText(this,"Erreur dans le login ou le mot de passe !", Toast.LENGTH_LONG );
 		Intent i = new Intent(this, Second.class);
+
+		i.putExtra("EXTRA_ID", "SOME DATAS");
 		//if(v.getId() == R.id.connection) {
 		switch(v.getId()) {
 			case R.id.connection:
-				t.show();
-				i.putExtra("mode", 1);
+				//t.show();
 				startActivity(i);
 				break;
 		}
