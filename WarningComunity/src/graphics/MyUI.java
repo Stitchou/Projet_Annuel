@@ -54,7 +54,9 @@ public class MyUI extends JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         tableEvent = new Table(new TableModel());
+        tableUser = new Table(new TableModel("user"));
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -109,12 +111,10 @@ public class MyUI extends JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        //Ajout des differents onglet au CardLayout
         jTabbedPane2.addTab("Log de connexion", jScrollPane1);
-        
-        
-        
-
         jTabbedPane2.addTab("Liste des Events", jScrollPane2);
+        jTabbedPane2.addTab("Liste des Utilisateurs", jScrollPane3);
 
         jMenu1.setText("Fichier");
 
@@ -190,7 +190,7 @@ public class MyUI extends JFrame {
 
     //bouton toolbar consulter
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        //Switch pour savoir quel onglet est sélectionner (Onglet numéroté à partir de 0) 0 : Logs / 1 : Event / 2 : User
     	switch(jTabbedPane2.getSelectedIndex())
     	{
     	case 0:
@@ -200,6 +200,9 @@ public class MyUI extends JFrame {
     		break;
     	case 1 : 
     		jScrollPane2.setViewportView(tableEvent);
+    		break;
+    	case 2 :
+    		jScrollPane3.setViewportView(tableUser);
     		break;
     	default : break;
     	}
@@ -241,9 +244,11 @@ public class MyUI extends JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private Table tableEvent;
+    private Table tableUser;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

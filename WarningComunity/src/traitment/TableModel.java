@@ -15,37 +15,95 @@ import javax.swing.table.*;
 
 public class TableModel extends DefaultTableModel implements TableModelListener {
 	
+	//Event table Result sets
 	private ResultSet dataEvent;
-	private ResultSet dataUser;
+	private ResultSet dataUserForEvent;
 	private ResultSet dataTypeEvent;
+	
+	//User table Result set
+	private ResultSet dataUser;
+	
+	//Content de la table par defaut  (Event)
 	private String[][] tableContent;
+	
+	//Content de la table user
+	private String[][] tableUserContent;
+	
 	private Logs classLog = new Logs();
 	private String msgLogs;
+	private String tableModelType;
 	
+	
+	//User's table constructor
+	public TableModel(String id){
+		super();
+		
+		if(id.equals("user"))
+		{
+			//Recuperation ResultSet de la BDD
+			tableModelType = id;
+			BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
+			String[] champs = {"users_id","pseudo","nom","prenom","mail","level"};
+			try {
+				sqlConnection.select("users", champs, "");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			dataUser = sqlConnection.getRs();
+			
+			//allocation tableContentUser
+			try {
+				dataUser.last();
+				tableUserContent = new String[dataUser.getRow()][6];
+				dataUser.beforeFirst();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//Copying data from ResultSet to tableContent
+			int i = 0;
+			try {
+				while(dataUser.next()){
+					tableUserContent[i][0] = dataUser.getString("users_id");
+					tableUserContent[i][1] =  dataUser.getString("pseudo");
+					tableUserContent[i][2] =  dataUser.getString("nom");
+					tableUserContent[i][3] =  dataUser.getString("prenom");
+					tableUserContent[i][4] =  dataUser.getString("mail");
+					tableUserContent[i][5] =  dataUser.getString("level");
+					i++;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			setDataVector(
+					tableUserContent,
+					new Object[]{"ID User","Pseudo","Nom User","Prenom User","Mail","Level"});
+			addTableModelListener(this);
+		}
+	}
+	
+	//Default constructor (Event table)
 	public TableModel(){
 		
 		super();
+		tableModelType = "event";
 		//Get all data from database
 		BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
 		String[] champs = {"event_id","users_id","type_event","date_debut","date_fin"};
 		try {
 			sqlConnection.select("events", champs, "");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dataEvent = sqlConnection.getRs();
 		try {
-			sqlConnection.selectTwo("users", "*"/*new String[]{"pseudo","users_id"}*/, "");
+			sqlConnection.selectTwo("users", "*", "");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		dataUser = sqlConnection.getRs();
+		dataUserForEvent = sqlConnection.getRs();
 		try {
-			sqlConnection.selectTwo("type_event", "*"/*new String[]{"nom","type_event"}*/, "");
+			sqlConnection.selectTwo("type_event", "*", "");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dataTypeEvent = sqlConnection.getRs();
@@ -76,8 +134,9 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 		}
 		setDataVector(
 				tableContent,
-				new Object[]{"ID Event","Pseudo","Nom Event","Date de debut","Date de fin"});	
+				new Object[]{"ID Event","Pseudo","Nom Event","Date de debut","Date de fin"});
 		addTableModelListener(this);
+		
 		
 	}
 
@@ -108,11 +167,11 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 		{
 			case "users" :
 				try {
-					while(dataUser.next()){
-						if(valeurCondition.equals(dataUser.getString(champCondition)))
+					while(dataUserForEvent.next()){
+						if(valeurCondition.equals(dataUserForEvent.getString(champCondition)))
 						{
-							value = dataUser.getString(champ);
-							dataUser.beforeFirst();
+							value = dataUserForEvent.getString(champ);
+							dataUserForEvent.beforeFirst();
 							return value;
 						}
 					}
@@ -138,41 +197,81 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 		return "Erreur Relation";
 	}
 	
-	//A FAIRE
+	public String getTableModelType(){
+		return tableModelType;
+	}
+	
+	
+	//A FAIRE : enregistrement BDD
 	@Override
-	
-	
-	
 	public void tableChanged(TableModelEvent e) {
 		Calendar cal = Calendar.getInstance();
 		String date = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date())+" à "+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
 		switch(e.getType())
 		{
-		case TableModelEvent.INSERT :
-			msgLogs = "Insertion EVENT le "+date+" - Nom Event : "+ tableContent[e.getLastRow()][2]
-					+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+		case TableModelEvent.INSERT :		
+			switch(tableModelType)
+			{
+			case "event" :
+				msgLogs = "Insertion "+tableModelType+" le "+date+" - ID : "+ tableContent[e.getLastRow()][0]
+						+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+				classLog.ecrire("./Logs/events.txt", msgLogs);
+				break;
+			case "user" :
+				msgLogs = "Insertion "+tableModelType+" le "+date+" - ID : "+ tableUserContent[e.getLastRow()][0]
+						+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+				classLog.ecrire("./Logs/users.txt", msgLogs);
+				break;
+			}	
 			System.out.println(msgLogs);
-			classLog.ecrire("./Logs/events.txt", msgLogs);
 			break;
-		case TableModelEvent.UPDATE :
-			msgLogs = "Update EVENT le "+date+" - Nom Event : "+ tableContent[e.getLastRow()][2]
-					+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+		case TableModelEvent.UPDATE :	
+			switch(tableModelType)
+			{
+			case "event" :
+				msgLogs = "Update "+tableModelType+" le "+date+" - ID : "+ tableContent[e.getLastRow()][0]
+						+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+				classLog.ecrire("./Logs/events.txt", msgLogs);
+				break;
+			case "user" :
+				msgLogs = "Update "+tableModelType+" le "+date+" - ID : "+ tableUserContent[e.getLastRow()][0]
+						+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+				classLog.ecrire("./Logs/users.txt", msgLogs);
+				break;
+			}	
 			System.out.println(msgLogs);
-			classLog.ecrire("./Logs/events.txt", msgLogs);
 			break;
 		case TableModelEvent.DELETE :
-			msgLogs = "Delete EVENT le "+date+" - Nom Event : "+ tableContent[e.getLastRow()][2]
-					+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+			switch(tableModelType)
+			{
+			case "event" :
+				msgLogs = "Delete "+tableModelType+" le "+date+" - ID : "+ tableContent[e.getLastRow()][0]
+						+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+				classLog.ecrire("./Logs/events.txt", msgLogs);
+				break;
+			case "user" :
+				msgLogs = "Delete "+tableModelType+" le "+date+" - ID : "+ tableUserContent[e.getLastRow()][0]
+						+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
+				classLog.ecrire("./Logs/users.txt", msgLogs);
+				break;
+			}	
 			System.out.println(msgLogs);
-			classLog.ecrire("./Logs/events.txt", msgLogs);
 			break;
 		default :
 			break;
 		}
-		if(e.getLastRow()<tableContent.length && e.getColumn()<tableContent[0].length)
+		switch(tableModelType)
 		{
-			tableContent[e.getLastRow()][e.getColumn()] = getValueAt(e.getLastRow(),e.getColumn()).toString();
-		}
+		case "event" :
+			if(e.getLastRow()<tableContent.length && e.getColumn()<tableContent[0].length)
+				tableContent[e.getLastRow()][e.getColumn()] = getValueAt(e.getLastRow(),e.getColumn()).toString();
+			break;
+		case "user" :
+			if(e.getLastRow()<tableUserContent.length && e.getColumn()<tableUserContent[0].length)
+				tableUserContent[e.getLastRow()][e.getColumn()] = getValueAt(e.getLastRow(),e.getColumn()).toString();
+			break;
+		}	
+		
 			
 		
 	}
