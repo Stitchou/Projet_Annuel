@@ -109,24 +109,12 @@ public class MyUI extends JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTabbedPane2.addTab("Logs", jScrollPane1);
-
-       /* jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));*/
+        jTabbedPane2.addTab("Log de connexion", jScrollPane1);
         
         
-        jScrollPane2.setViewportView(tableEvent);
+        
 
-        jTabbedPane2.addTab("Events", jScrollPane2);
+        jTabbedPane2.addTab("Liste des Events", jScrollPane2);
 
         jMenu1.setText("Fichier");
 
@@ -203,9 +191,19 @@ public class MyUI extends JFrame {
     //bouton toolbar consulter
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        logs lect= new logs();
-        String mots=lect.lire("./Logs/fermeture.txt");
-        jTextArea1.setText(mots);
+    	switch(jTabbedPane2.getSelectedIndex())
+    	{
+    	case 0:
+    		Logs lect= new Logs();
+            String mots=lect.lire("./Logs/fermeture.txt");
+            jTextArea1.setText(mots);
+    		break;
+    	case 1 : 
+    		jScrollPane2.setViewportView(tableEvent);
+    		break;
+    	default : break;
+    	}
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     
     // bouton toolbar modifier

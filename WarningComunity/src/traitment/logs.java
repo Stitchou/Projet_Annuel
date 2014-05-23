@@ -16,7 +16,7 @@ import java.io.BufferedReader ;
 import java.io.IOException ;
 import java.io.PrintWriter;
 
-public class logs {
+public class Logs {
 
         // fonction d'écriture
 	public void ecrire(String path, String text) 

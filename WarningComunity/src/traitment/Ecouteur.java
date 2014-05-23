@@ -22,7 +22,7 @@ import java.util.Locale;
 // definition de la classe 
 public class Ecouteur implements WindowListener {
 
-	logs fermeture = new logs();
+	Logs fermeture = new Logs();
 	
 	public void windowClosing(WindowEvent arg0) {
 		

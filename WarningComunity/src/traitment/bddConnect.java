@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class bddConnect {
+public class BDDConnect {
 
 
 
@@ -28,7 +28,7 @@ public class bddConnect {
   private String pass;
   private ResultSet rs;
   
-  public bddConnect(){
+  public BDDConnect(){
 	  /*
 	  this.connexion = "jdbc:mysql://db412384129.db.1and1.com/db412384129";
 	  this.root = "dbo412384129";
@@ -39,7 +39,7 @@ public class bddConnect {
 	  this.pass = "";
   }
 
-  public bddConnect(String connexion, String root, String pass){
+  public BDDConnect(String connexion, String root, String pass){
     this.connexion = ("jdbc:mysql://" + connexion);
     this.root = root;
     this.pass = pass;
