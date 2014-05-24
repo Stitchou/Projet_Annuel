@@ -6,3 +6,12 @@ bin/WarningComunity/Logs.class
 /bin
 /WarningComunity/nbproject/private/
 /WarningComunity/build/
+/client/nbproject/private/
+/client/build/
+client/build.xml
+client/manifest.mf
+client/nbproject/build-impl.xml
+client/nbproject/genfiles.properties
+client/nbproject/project.properties
+client/nbproject/project.xml
+client/src/client/Client.java

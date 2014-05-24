@@ -26,9 +26,9 @@ public class WarningComunity {
 		{
 		    public void run()  {
 		        new MyUI().setVisible(true);
+                        Transmission server=new Transmission();
 		    }
 		};
 		SwingUtilities.invokeLater(r);
     }
-    
 }
