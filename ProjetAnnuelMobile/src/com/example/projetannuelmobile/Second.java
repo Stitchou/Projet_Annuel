@@ -42,24 +42,14 @@ public class Second extends Activity implements OnClickListener {
 		return true;
 	}
 
-//	LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-//	Location l = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+	
 	private double longitude;
 	private double latitude;
 	private int id;
 	
-/*
-	LocationManager lmo = (LocationManager)getSystemService(Context.LOCATION_SERVICE) ;
-	LocationListener llo = new LocationManagerHelper() {
-		@Override
-		public void onLocationChanged(Location lc) {
-			super.onLocationChanged(lc); // On execute la méthode parente
 
-			latitude = LocationManagerHelper.getLatitude();
-			longitude = LocationManagerHelper.getLongitude();
-		}
-	};
-*/
+	
+
 	
 	@Override
 	public void onClick(View v) {
@@ -67,30 +57,35 @@ public class Second extends Activity implements OnClickListener {
 		 * // TODO Auto-generated method stub
 		 */
 		Toast t;
+	
+		LocationManager lmo = (LocationManager)getSystemService(Context.LOCATION_SERVICE) ;
+		Location l = lmo.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		LocationListener llo = new LocationManagerHelper() {
+			@Override
+			public void onLocationChanged(Location lc) {
+				super.onLocationChanged(lc); // On execute la méthode parente
+
+				latitude = LocationManagerHelper.getLatitude();
+				longitude = LocationManagerHelper.getLongitude();
+			}
+		};
 		switch (v.getId()) {
 		case R.id.button1:
 			// instruction si on click sur le 1er bouton
-			// t = Toast.makeText(this, " 1er BOUTON \nLatitude : " + latitude +
-			// "\nLongitude : " + longitude, Toast.LENGTH_LONG);
-			t = Toast.makeText(this, " 1er BOUTON ", Toast.LENGTH_LONG);
+		 t = Toast.makeText(this, " 1er BOUTON \nLatitude : " + latitude +
+			 "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
 		case R.id.button2:
 			// instruction si on click sur le 2eme bouton
-			// t = Toast.makeText(this, " 2eme BOUTON \nLatitude : " + latitude
-			// + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
-			t = Toast.makeText(this, " 2eme BOUTON ", Toast.LENGTH_LONG);
-			// longitude = location.getLongitude();
-			// latitude = location.getLatitude();
+			 t = Toast.makeText(this, " 2eme BOUTON \nLatitude : " + latitude
+			 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
 		case R.id.button3:
 			// instruction si on click sur le 3eme bouton
-//			 t = Toast.makeText(this, " 3eme BOUTON \nLatitude : " + latitude
-//			 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
-			t = Toast.makeText(this, " 3eme BOUTON ", Toast.LENGTH_LONG);
-			// longitude = location.getLongitude();
-			// latitude = location.getLatitude();
+		 t = Toast.makeText(this, " 3eme BOUTON \nLatitude : " + latitude
+		 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
 		}
