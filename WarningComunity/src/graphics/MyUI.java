@@ -50,13 +50,16 @@ public class MyUI extends JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
         tableEvent = new Table(new TableModel());
         tableUser = new Table(new TableModel("user"));
+        tableAppli = new Table(new TableModel("appli"));
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -105,7 +108,19 @@ public class MyUI extends JFrame {
             }
         });
         jToolBar1.add(jButton3);
-
+        
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/a7 (Copier).png"))); // NOI18N
+        jButton4.setText("Rafraichir");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton4);
+        
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -115,7 +130,8 @@ public class MyUI extends JFrame {
         jTabbedPane2.addTab("Log de connexion", jScrollPane1);
         jTabbedPane2.addTab("Liste des Events", jScrollPane2);
         jTabbedPane2.addTab("Liste des Utilisateurs", jScrollPane3);
-
+        jTabbedPane2.addTab("Liste des Applications Connectées", jScrollPane4);
+        
         jMenu1.setText("Fichier");
 
         jMenuItem1.setText("Consulter");
@@ -190,7 +206,7 @@ public class MyUI extends JFrame {
 
     //bouton toolbar consulter
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //Switch pour savoir quel onglet est sélectionner (Onglet numéroté à partir de 0) 0 : Logs / 1 : Event / 2 : User
+        //Switch pour savoir quel onglet est sélectionner (Onglet numéroté à partir de 0) 0 : Logs / 1 : Event / 2 : User / 3 : Appli Users Connected
     	switch(jTabbedPane2.getSelectedIndex())
     	{
     	case 0:
@@ -203,6 +219,10 @@ public class MyUI extends JFrame {
     		break;
     	case 2 :
     		jScrollPane3.setViewportView(tableUser);
+    		break;
+    	case 3:
+    		jScrollPane4.repaint();
+    		jScrollPane4.setViewportView(tableAppli);
     		break;
     	default : break;
     	}
@@ -217,6 +237,35 @@ public class MyUI extends JFrame {
     //bouton toolbar supprimer
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
+  //bouton toolbar refresh
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    	  
+        switch(jTabbedPane2.getSelectedIndex())
+    	{
+    	case 0:
+    		Logs lect= new Logs();
+            String mots=lect.lire("./Logs/fermeture.txt");
+            jTextArea1.setText(mots);
+    		break;
+    	case 1 : 
+    		tableEvent = new Table(new TableModel());
+    		jScrollPane2.setViewportView(tableEvent);
+    		jScrollPane2.repaint();
+    		break;
+    	case 2 :
+    		tableUser = new Table(new TableModel("user"));
+    		jScrollPane3.setViewportView(tableUser);
+    		jScrollPane3.repaint();
+    		break;
+    	case 3:
+    		tableAppli = new Table(new TableModel("appli"));
+    		jScrollPane4.setViewportView(tableAppli);
+    		jScrollPane4.repaint();
+    		break;
+    	default : break;
+    	}
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // item menu modifier
@@ -236,6 +285,7 @@ public class MyUI extends JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -245,10 +295,12 @@ public class MyUI extends JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private Table tableEvent;
     private Table tableUser;
+    private Table tableAppli;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

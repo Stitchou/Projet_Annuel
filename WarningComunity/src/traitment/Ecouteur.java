@@ -27,7 +27,7 @@ public class Ecouteur implements WindowListener {
 	public void windowClosing(WindowEvent arg0) {
 		
 		// vérification contre les fermetures intempestives 
-		int rep = JOptionPane.showConfirmDialog(null, "Sur?");
+		int rep = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment fermer le serveur ?");
 		
 		// récupération de la date et heure pour le log
 		Calendar cal = Calendar.getInstance();
@@ -35,6 +35,7 @@ public class Ecouteur implements WindowListener {
 		if(rep==0)
 		{
 			fermeture.ecrire("./Logs/fermeture.txt","Fermeture le " +msg );
+			fermeture.clear("./Logs/user_list.txt");
 			System.exit(0);
 		}
 		else

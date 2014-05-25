@@ -37,6 +37,8 @@ public class Table extends JTable {
 	        for(int i =0; i<6;i++)
 	        	getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
 			break;
+		case "appli":
+			
 		}
 		setFillsViewportHeight(true);
         setAutoCreateRowSorter(true);

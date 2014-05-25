@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
         android:background="#FFFFFF"
-        android:text="Valider" 
+        android:text="Se connecter" 
         android:textSize="@dimen/text_dim"/>
 
     <TextView
@@ -86,5 +86,25 @@
         android:gravity="center"
         android:inputType="textPassword"
         android:textSize="@dimen/text_dim" />
+
+    <Button
+        android:id="@+id/inscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/connection"
+        android:layout_centerHorizontal="true"
+        android:background="#FFFFFF"
+        android:text="S&apos;inscrire"
+        android:textSize="@dimen/text_dim" />
+
+    <Button
+        android:id="@+id/anonymous"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inscription"
+        android:layout_below="@+id/inscription"
+        android:background="#FFFFFF"
+        android:text="Se connecter - Anonymous"
+        android:textSize="@dimen/text_dim_2" />
     
 </RelativeLayout>

@@ -24,9 +24,9 @@ public class Second extends Activity implements OnClickListener {
 			String datas = extras.getString("EXTRA_ID");
 			if (datas != null) {
 
-				 Button b1 = (Button)findViewById(R.id.button1);
-				 Button b2 = (Button)findViewById(R.id.button2);
-				 Button b3 = (Button)findViewById(R.id.button3);
+				 Button b1 = (Button)findViewById(R.id.radars);
+				 Button b2 = (Button)findViewById(R.id.accicents);
+				 Button b3 = (Button)findViewById(R.id.autres);
 				 b1.setOnClickListener(this);
 				 b2.setOnClickListener(this);
 				 b3.setOnClickListener(this);
@@ -70,19 +70,19 @@ public class Second extends Activity implements OnClickListener {
 			}
 		};
 		switch (v.getId()) {
-		case R.id.button1:
+		case R.id.radars:
 			// instruction si on click sur le 1er bouton
 		 t = Toast.makeText(this, " 1er BOUTON \nLatitude : " + latitude +
 			 "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
-		case R.id.button2:
+		case R.id.accicents:
 			// instruction si on click sur le 2eme bouton
 			 t = Toast.makeText(this, " 2eme BOUTON \nLatitude : " + latitude
 			 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
-		case R.id.button3:
+		case R.id.autres:
 			// instruction si on click sur le 3eme bouton
 		 t = Toast.makeText(this, " 3eme BOUTON \nLatitude : " + latitude
 		 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);

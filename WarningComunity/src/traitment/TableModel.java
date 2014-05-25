@@ -37,11 +37,12 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 	//User's table constructor
 	public TableModel(String id){
 		super();
-		
-		if(id.equals("user"))
+		tableModelType = id;
+		switch(id)
 		{
+		case "user" :
 			//Recuperation ResultSet de la BDD
-			tableModelType = id;
+			
 			BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
 			String[] champs = {"users_id","pseudo","nom","prenom","mail","level"};
 			try {
@@ -78,6 +79,31 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 					tableUserContent,
 					new Object[]{"ID User","Pseudo","Nom User","Prenom User","Mail","Level"});
 			addTableModelListener(this);
+			break;
+		
+		case "appli" :
+			Logs classLog = new Logs();
+			String[][] user_list;
+			String content = classLog.lire("./Logs/user_list.txt");
+			if(content.equals(""))
+			{
+				user_list = new String[10][5];
+			}
+			else
+			{
+				String[] test1 = content.split("\n");
+				user_list = new String[test1.length][test1[0].split("&").length];
+				for(int j =0;j < user_list.length; j++)
+				{
+					user_list[j] = test1[j].split("&");
+				}
+			}
+			
+			setDataVector(
+					user_list,
+					new Object[]{"N°","Identifiant","Mot de passe","Date de connexion","Heure de connexion"});
+			addTableModelListener(this);
+			break;
 		}
 	}
 	

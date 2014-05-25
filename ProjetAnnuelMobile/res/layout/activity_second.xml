@@ -10,20 +10,20 @@
     tools:context=".Second" >
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/autres"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_below="@+id/button2"
+        android:layout_alignLeft="@+id/accicents"
+        android:layout_below="@+id/accicents"
         android:background="#FFFFFF"
         android:text="Autres" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/accicents"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
+        android:layout_alignLeft="@+id/radars"
+        android:layout_below="@+id/radars"
         android:background="#FFFFFF"
         android:text="Accidents" />
 
@@ -31,7 +31,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/radars"
         android:layout_alignParentTop="true"
         android:background="#FFFFFF"
         android:gravity="center"
@@ -39,7 +39,7 @@
         android:textSize="@dimen/text_dim_2" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/radars"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"

@@ -38,7 +38,19 @@ public class Logs {
 			System.out.println("Problème d'IO : "+ a.getMessage()+" "+path+" "+text);
 		}
 	}
-        
+       public void clear (String path)
+       {
+    	   PrintWriter writer;
+		try {
+			writer = new PrintWriter(new FileWriter(path));
+			writer.print("");
+	    	writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	   
+       }
         //fonction de lecture
         public String lire (String path) 
 	{

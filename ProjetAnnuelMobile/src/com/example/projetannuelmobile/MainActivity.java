@@ -26,7 +26,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button connect = (Button)findViewById(R.id.connection);
+		Button inscription = (Button)findViewById(R.id.inscription);
+		Button anonymous = (Button)findViewById(R.id.anonymous);
 		connect.setOnClickListener(this);
+		inscription.setOnClickListener(this);
+		anonymous.setOnClickListener(this);
+		
 	}
 
 	@Override
@@ -46,19 +51,41 @@ public class MainActivity extends Activity implements OnClickListener {
 		Editable ed2= et2.getText();
 
 		String login = ed1.toString();
-		String log, pwd;//, mail;
 		String mdp = ed2.toString();
-		Toast t = null;
-		t = Toast.makeText(this,"Erreur dans le login ou le mot de passe !", Toast.LENGTH_LONG );
 		Intent i = new Intent(this, Second.class);
-
-		i.putExtra("EXTRA_ID", "SOME DATAS");
-		//if(v.getId() == R.id.connection) {
-		switch(v.getId()) {
-			case R.id.connection:
-				//t.show();
+		Toast t = null;
+		SocketSyncTask asyncTask;
+		switch(v.getId())
+		{
+			//Bouton Se connecter
+			case R.id.connection :
+				//Envoie par socket le login et mdp entré
+				asyncTask = new SocketSyncTask();
+			    asyncTask.execute(login+"&"+mdp);
+				i.putExtra("EXTRA_ID", "SOME DATAS");
+				startActivity(i);
+				break;
+				/*else
+				{
+					t = Toast.makeText(this,"Erreur dans le login ou le mot de passe !", Toast.LENGTH_LONG );
+					t.show();
+				}*/	
+			//Bouton S'inscrire
+			case R.id.inscription :
+				//Renvoi vers site web 
+				t = Toast.makeText(this,"Bouton non fonctionnel", Toast.LENGTH_LONG );
+				t.show();
+				break;
+			//Bouton Se connecter - Anonymous
+			case R.id.anonymous:
+				asyncTask=new SocketSyncTask();
+		        asyncTask.execute("Anonymous");
+				i.putExtra("EXTRA_ID", "SOME DATAS");
 				startActivity(i);
 				break;
 		}
+		
+		
+
 	}
 }
