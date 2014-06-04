@@ -25,7 +25,7 @@ public class Logs {
 		try
 		{
 			ecri = new PrintWriter(new FileWriter(path,true));
-			ecri.print("\r\n"+text);
+			ecri.println(text);
 			ecri.flush();
 			ecri.close();
 		}
@@ -63,6 +63,7 @@ public class Logs {
 			{
 				tmp += lect.readLine()+"\n"; 
 			}
+                        lect.close();
 		}//try
 		catch (NullPointerException a)
 		{
@@ -70,7 +71,7 @@ public class Logs {
 		}
 		catch (IOException a) 
 		{
-			System.out.println("Problème d'IO");
+			System.out.println("Problème d'IO  en lecture");
 		}
 		return tmp;
 	} 
