@@ -17,6 +17,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Clock;
 
 public class BDDConnect {
 
@@ -262,7 +263,6 @@ public class BDDConnect {
         }
       }
       sel = sel + " FROM " + table + " " + condition;
-
       Connection c = getConnection();
       Statement s = c.createStatement();
       this.rs = s.executeQuery(sel);

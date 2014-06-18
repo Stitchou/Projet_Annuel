@@ -101,7 +101,7 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 			
 			setDataVector(
 					user_list,
-					new Object[]{"N°","Identifiant","Mot de passe","Date de connexion","Heure de connexion"});
+					new Object[]{"N","Identifiant","Mot de passe","Date de connexion","Heure de connexion"});
 			addTableModelListener(this);
 			break;
 		}

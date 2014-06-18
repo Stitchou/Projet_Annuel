@@ -130,7 +130,7 @@ public class MyUI extends JFrame {
         jTabbedPane2.addTab("Log de connexion", jScrollPane1);
         jTabbedPane2.addTab("Liste des Events", jScrollPane2);
         jTabbedPane2.addTab("Liste des Utilisateurs", jScrollPane3);
-        jTabbedPane2.addTab("Liste des Applications Connectées", jScrollPane4);
+        jTabbedPane2.addTab("Liste des Applications Connectees", jScrollPane4);
         
         jMenu1.setText("Fichier");
 
@@ -206,7 +206,7 @@ public class MyUI extends JFrame {
 
     //bouton toolbar consulter
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //Switch pour savoir quel onglet est sélectionner (Onglet numéroté à partir de 0) 0 : Logs / 1 : Event / 2 : User / 3 : Appli Users Connected
+        //Switch pour savoir quel onglet est sï¿½lectionner (Onglet numerote a partir de 0) 0 : Logs / 1 : Event / 2 : User / 3 : Appli Users Connected
     	switch(jTabbedPane2.getSelectedIndex())
     	{
     	case 0:

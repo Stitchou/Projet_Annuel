@@ -67,7 +67,7 @@ class connectClient implements Runnable {
                     br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                    contentSocket = br.readLine();
                    br.close();
-                   System.out.println("Appli n°"+nbrclient+ " est connectée !\nUtilisateur :"+contentSocket);
+                   System.out.println("Appli n"+nbrclient+ " est connectee !\nUtilisateur :"+contentSocket);
                    cal = Calendar.getInstance();
            		   msg=new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date())+"&"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
                    log.ecrire("./Logs/user_list.txt", nbrclient+"&"+contentSocket+"&"+msg);
