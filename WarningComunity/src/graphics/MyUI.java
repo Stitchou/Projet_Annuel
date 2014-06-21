@@ -34,7 +34,7 @@ public class MyUI extends JFrame {
         setSize(d.width/2,d.height/2);
         setResizable(false);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     /**

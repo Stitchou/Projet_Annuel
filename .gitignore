@@ -16,3 +16,7 @@ client/nbproject/project.properties
 client/nbproject/project.xml
 client/src/client/Client.java
 WarningComunity/Logs/fermeture.txt
+/testplug/nbproject/private/
+/WarningComunity/dist/
+/testplug/dist/
+/testplug/build/

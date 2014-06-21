@@ -10,6 +10,7 @@ package warningcomunity;
  *
  * @author 626
  */
+import Plugins.Loader;
 import java.sql.ResultSet;
 import graphics.*;
 import javax.swing.JOptionPane;
@@ -95,10 +96,12 @@ private static boolean verifLogin()
      */
     public static void main(String[] args) {
         
-         boolean valide ;
+        /* boolean valide ;
+         
          valide=verifLogin();
         if (valide)
-        {
+        {   */
+            Loader.load();
             Runnable r = new Runnable ()
                    {
                        public void run()  {
@@ -110,5 +113,5 @@ private static boolean verifLogin()
                    Transmission server=new Transmission();
             
         }
-    }
+    //}
 }
