@@ -1,52 +1,25 @@
 <div id="profil" style="width: 70%; margin: 0 auto; background: #FFFFFF; opacity: 0.8; padding: 10px 0;" >
 	<?php 
 		$jsDependencies[] = "include/scripts/profil.js";
-		$id =  $_SESSION['id'];
-		if( $_SESSION['lvl'] == USER ){
-			$sql = 'SELECT * FROM events e, type_event te WHERE te.type_event = e.type_event AND e.users_id = ' . $id ;
-			$req = $db->query($sql);
-		?>	
-		<h3> Vos signalements : </h3>
+		$smenu["signalement"] = "Signalement";
+		$smenu["modifMdp"] = "Modifier mon mot de passe";	
+		if( $_SESSION['lvl'] == ADMIN )
+			$smenu["user"] = "Utilisateurs";
+		//if( $_SESSION['lvl'] == USER )
+	?>
+	<div id="smenu" >
 		<ul>
-		<?php
-			while ( $d = $req->fetch() ) {
-				?>
-				<li><?php echo $d['nom'] ?></li>
-				<?php
-			}
-		?>
+			<?php
+				foreach ($smenu as $k => $v) {
+					?>
+					<li <?php echo ( isset($_GET['spage']) && $_GET['spage'] == $k ) ? ' class="selec" ' : ( ( !isset($_GET['spage']) && $k == 'signalement' ) ? ' class="selec" ' : '' ) ; ?> ><a href="index.php?page=profil&spage=<?php echo $k; ?>" > <?php echo $v; ?> </a></li>
+					<?php
+				}
+			?>
 		</ul>
-		<?php
-		} else if( $_SESSION['lvl'] == ADMIN ){
-			$sql = 'SELECT te.nom AS tenom, u.*, event_id FROM events e, type_event te, users u WHERE te.type_event = e.type_event AND e.users_id = u.users_id';
-			$req = $db->query($sql);
-		?>	
-		<h3> Vos signalements : </h3>
-		<table style="width: 100%;" >
-			<tr>
-				<td><b>N°</b></td>
-				<td><b>signalement</b></td>
-				<td><b>pseudo</b></td>
-				<td><b>nom</b></td>
-				<td><b>prenom</b></td>
-				<td><b>action</b></td>
-			</tr>
-		<?php
-			$i = 1;
-			while ( $d = $req->fetch() ) {
-				?>
-				<tr id="event_<?php echo $d['event_id'] ?>" >
-					<td><?php echo $i ?></td>
-					<td><?php echo $d['tenom'] ?></td>
-					<td><?php echo $d['pseudo'] ?></td>
-					<td><?php echo $d['nom'] ?></td>
-					<td><?php echo $d['prenom'] ?></td>
-					<td><a onclick="delSignalement(<?php echo $d['event_id'] ?>); return false;" ><img src="img/icon/croix.png" /></a></td>
-				</tr>
-				<?php
-				$i++;
-			}
-		?>
-		</table>
-		<?php } ?>
+	</div>
+	<?php
+		$spg = ( isset($_GET['spage']) ) ? $_GET['spage'] : 'signalement' ;
+		include('spages/' . $spg . '.php');
+	?>
 </div>
