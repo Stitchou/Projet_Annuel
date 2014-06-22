@@ -1,0 +1,16 @@
+
+
+function delSignalement( id ){
+	var data = {};
+	data['param'] = {};
+	data['table'] = 'events';
+	data['param']['event_id'] = id;
+	$.ajax({
+		data : data,
+		url : 'include/data/delete.php',
+		method : 'POST',
+		success : function(){
+			$( ['#event_', id].join('') ).fadeOut(100);
+		}
+	})
+}

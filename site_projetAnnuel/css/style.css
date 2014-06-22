@@ -1,0 +1,85 @@
+body {
+	background: #f68519;
+}
+
+#body-content {
+	background: url('../img/monde_bleu.jpg');
+	background-size: 1500px;
+	min-height: 350px;
+	width: 100%;
+}
+
+#page {
+	width: 100%;
+	margin: auto;
+	padding-top: 10px ;
+}
+
+#menu {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+#menu ul li a {
+	color: #FFFFFF;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#menu ul li img {
+	position: relative;
+	top: 5px;
+}
+
+#menu ul li {
+	display: inline-block;
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#footer ul li {
+	display: inline-block;
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#footer ul {
+	font-size: 0.8em;
+}
+
+#connexion{
+	float: left;
+	padding: 20px;
+	margin-top: 10px;
+	margin-right: 70px;
+	width: 40%;
+}
+
+#inscription{
+	padding: 20px;
+}
+
+fieldset {
+	border: 1px #DEDEDE solid;
+	border-radius: 5px; 
+}
+
+#footer {
+	width: 100%;
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+/*	color: #f46519;*/
+}
+
+.field {
+	background: #FFFFFF;
+	opacity: 0.8;
+}
