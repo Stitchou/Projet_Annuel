@@ -189,7 +189,9 @@ public class MyUI extends JFrame {
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
-
+        
+        ImageIcon img = new ImageIcon("./src/img/a4.png");
+        this.setIconImage(img.getImage());
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
