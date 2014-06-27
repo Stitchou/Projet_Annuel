@@ -13,14 +13,11 @@ package traitment;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 // definition de la classe 
 public class Ecouteur implements WindowListener {
