@@ -7,6 +7,8 @@
 package graphics;
 
 import java.awt.*;
+import java.sql.ResultSet;
+
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 
@@ -234,11 +236,105 @@ public class MyUI extends JFrame {
     // bouton toolbar modifier
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+    	System.out.println("Modification");
+		String []userTab = {"pseudo", "nom", "prenom", "mail", "level"};
+		String []eventTab = {"type_event", "date_debut", "date_fin"};
+		BDDConnect bc = new BDDConnect();
+		int rows = 0;
+    	switch( jTabbedPane2.getSelectedIndex() ){
+    		case 0:
+    			break;
+    		case 1:
+    			rows = tableEvent.getRowCount();
+    			String []eventValue = new String[3];
+    			try{
+    				if(JOptionPane.showConfirmDialog(null, "Sur ?", "Modification", 0) == 0){
+	    				for(int i = 0; i < rows; i++){
+	    					bc.selectTwo("type_event", " type_event ", " WHERE nom=\"" + tableEvent.getValueAt(i, 2) + "\"");
+	    					ResultSet rs = bc.getRs();
+	    					rs.next();
+	    					eventValue[0] = rs.getString(1);
+	    					eventValue[1] = (String) tableEvent.getValueAt(i, 3);
+	    					eventValue[2] = (String) tableEvent.getValueAt(i, 4);
+	    					bc.update("events", eventTab, eventValue, " event_id = " + tableEvent.getValueAt(i, 0), 1);
+	    				}
+    				}
+    			}catch(Exception e){
+    				e.getMessage();
+    			}
+    			break;
+    		case 2:
+    			rows = tableUser.getRowCount();
+    			String []userValue = new String[5];
+    			try{
+    				if(JOptionPane.showConfirmDialog(null, "Sur ?", "Modification", 0) == 0){
+	    				for(int i = 0; i < rows; i++){
+	    					userValue[0] = (String) tableUser.getValueAt(i, 1);
+	    					userValue[1] = (String) tableUser.getValueAt(i, 2);
+	    					userValue[2] = (String) tableUser.getValueAt(i, 3);
+	    					userValue[3] = (String) tableUser.getValueAt(i, 4);
+	    					bc.update("users", userTab, userValue, " users_id = " + userValue[0], 0);
+	    				}
+    				}
+    			}catch(Exception e){
+    				e.getMessage();
+    			}
+    			break;
+    	}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //bouton toolbar supprimer
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+    	System.out.println("Supp");
+		BDDConnect bc = new BDDConnect();
+		int rowCount = 0;
+    	switch( jTabbedPane2.getSelectedIndex() ){
+    		case 0:
+    			break;
+    		case 2: // user suppression
+    			rowCount = tableUser.getSelectedRowCount();
+    			try{
+    				if( rowCount == 1 ){
+    					int rowIdx = tableUser.getSelectedRow();
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0)
+    						bc.delete("users", " users_id = " + tableUser.getValueAt(rowIdx, 0));
+    					jButton4ActionPerformed(evt);
+    				} else if( rowCount > 1 ){
+    					int []rowIdx = tableUser.getSelectedRows();
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0){
+    						for(int i = 0; i < rowCount; i++ )
+    							bc.delete("users", "users_id = " + tableUser.getValueAt(rowIdx[i], 0));
+    					}
+    				}
+    			}catch(Exception e){
+    				e.getMessage();
+    			}
+    			break;
+    		case 1: // event suppression
+    			rowCount = tableEvent.getSelectedRowCount();
+    			try{
+    				if( rowCount == 1 ){
+    					int rowIdx = tableEvent.getSelectedRow();
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0)
+    						bc.delete("events", " event_id = " + tableEvent.getValueAt(rowIdx, 0));
+    					// rafraichir la fenetre
+    					jButton4ActionPerformed(evt);
+    				} else if( rowCount > 1 ){
+    					// Récuperation d'un tableau de int qui contient les lignes selectionné
+    					int []rowIdx = tableEvent.getSelectedRows();
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0){
+    						for(int i = 0; i < rowCount; i++ )
+    							bc.delete("events", "event_id = " + tableEvent.getValueAt(rowIdx[i], 0));
+    					}
+    					// rafraichir la fenetre
+    					jButton4ActionPerformed(evt);
+    				}
+    			}catch(Exception e){
+    				e.getMessage();
+    			}
+    			break;
+    	}
     }//GEN-LAST:event_jButton3ActionPerformed
     
   //bouton toolbar refresh
@@ -273,6 +369,7 @@ public class MyUI extends JFrame {
     // item menu modifier
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         jButton2ActionPerformed(evt);
+        System.out.println("Modifier");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     // item menu supprimer 

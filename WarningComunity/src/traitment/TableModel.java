@@ -150,7 +150,7 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 			while(dataEvent.next()){
 				tableContent[i][0] = dataEvent.getString("event_id");
 				tableContent[i][1] = getRelation("users","pseudo", "users_id", dataEvent.getString("users_id"));
-				tableContent[i][2] = getRelation("type_event","nom", "type_event", dataEvent.getString("type_event"));;
+				tableContent[i][2] = getRelation("type_event","nom", "type_event", dataEvent.getString("type_event"));
 				tableContent[i][3] =  dataEvent.getString("date_debut");
 				tableContent[i][4] =  dataEvent.getString("date_fin");
 				i++;
@@ -226,11 +226,25 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 	public String getTableModelType(){
 		return tableModelType;
 	}
-	
+
+	public boolean isCellEditable(int rowIndex, int columnIndex){
+		switch( columnIndex ){
+			case 2:
+			case 3:
+			case 4:
+				return true;
+			case 0:
+			case 1:
+				return false;
+			default:
+				return true;
+		}
+	}
 	
 	//A FAIRE : enregistrement BDD
 	@Override
 	public void tableChanged(TableModelEvent e) {
+		if( isCellEditable(e.getLastRow(), e.getColumn()) == false && tableModelType.equals("event") ) return; 
 		Calendar cal = Calendar.getInstance();
 		String date = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date())+" à "+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
 		switch(e.getType())
@@ -248,7 +262,7 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 						+"|| Nouvelle valeur : "+getValueAt(e.getLastRow(),e.getColumn());
 				classLog.ecrire("./Logs/users.txt", msgLogs);
 				break;
-			}	
+			}
 			System.out.println(msgLogs);
 			break;
 		case TableModelEvent.UPDATE :	
