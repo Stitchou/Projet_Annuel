@@ -70,8 +70,6 @@ public class AutomateCheck {
     {
         String heure=date.substring(date.indexOf(" ")+1, date.length()-2);
         String jour=date.substring(0,date.indexOf(" "));
-        System.out.println("heure : "+heure);
-        System.out.println(" date:"+jour);
         String [] decomDate = new String [3];
         decomDate[0]=jour.substring(0,jour.indexOf("-"));
         jour=jour.substring(jour.indexOf("-")+1);
@@ -91,7 +89,7 @@ public class AutomateCheck {
         String dat = dateFormat.format(actuelle);
 // reccuperation du calendrier pour l'heure systeme
         Calendar cal = Calendar.getInstance();
-        //System.out.println(cal.get(Calendar.YEAR)+" "+cal.get(Calendar.MONTH)+1+" "+cal.get(Calendar.DAY_OF_MONTH));
+        
         if(Integer.parseInt(decomDate[0])<=cal.get(Calendar.YEAR) && 
            Integer.parseInt(decomDate[1])<=cal.get(Calendar.MONTH)+1 && 
            Integer.parseInt(decomDate[2])<cal.get(Calendar.DAY_OF_MONTH))
@@ -110,7 +108,7 @@ public class AutomateCheck {
         String condition="event_id="+e_id;
         try {
             sqlConnection.delete("events", condition);
-            System.out.println("Event numero :"+e_id+"supprime");
+            System.out.println("Event numero : "+e_id+" supprime");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

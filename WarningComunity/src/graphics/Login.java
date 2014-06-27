@@ -35,7 +35,6 @@ public boolean getresult()
 }
 public  boolean verifLogin()
 {
-   
     ResultSet dataUser;
     String login, mdp;
    
@@ -67,7 +66,6 @@ public  boolean verifLogin()
             } catch (Exception e) {
                     e.printStackTrace();
             }
-    //}
     return false;
 }
     /**
