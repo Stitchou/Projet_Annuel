@@ -256,7 +256,7 @@ public class MyUI extends JFrame {
 	    					eventValue[0] = rs.getString(1);
 	    					eventValue[1] = (String) tableEvent.getValueAt(i, 3);
 	    					eventValue[2] = (String) tableEvent.getValueAt(i, 4);
-	    					bc.update("events", eventTab, eventValue, " event_id = " + tableEvent.getValueAt(i, 0), 1);
+	    					bc.update("events", eventTab, eventValue, " event_id = " + tableEvent.getValueAt(i, 0));
 	    				}
     				}
     			}catch(Exception e){
@@ -273,7 +273,8 @@ public class MyUI extends JFrame {
 	    					userValue[1] = (String) tableUser.getValueAt(i, 2);
 	    					userValue[2] = (String) tableUser.getValueAt(i, 3);
 	    					userValue[3] = (String) tableUser.getValueAt(i, 4);
-	    					bc.update("users", userTab, userValue, " users_id = " + userValue[0], 0);
+                                                userValue[4] = (String) tableUser.getValueAt(i, 5);
+	    					bc.update("users", userTab, userValue, " users_id = " + tableUser.getValueAt(i, 0));
 	    				}
     				}
     			}catch(Exception e){
@@ -297,12 +298,12 @@ public class MyUI extends JFrame {
     			try{
     				if( rowCount == 1 ){
     					int rowIdx = tableUser.getSelectedRow();
-    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0)
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppression", 0) == 0)
     						bc.delete("users", " users_id = " + tableUser.getValueAt(rowIdx, 0));
     					jButton4ActionPerformed(evt);
     				} else if( rowCount > 1 ){
     					int []rowIdx = tableUser.getSelectedRows();
-    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0){
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppression", 0) == 0){
     						for(int i = 0; i < rowCount; i++ )
     							bc.delete("users", "users_id = " + tableUser.getValueAt(rowIdx[i], 0));
     					}
@@ -316,14 +317,14 @@ public class MyUI extends JFrame {
     			try{
     				if( rowCount == 1 ){
     					int rowIdx = tableEvent.getSelectedRow();
-    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0)
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppression", 0) == 0)
     						bc.delete("events", " event_id = " + tableEvent.getValueAt(rowIdx, 0));
     					// rafraichir la fenetre
     					jButton4ActionPerformed(evt);
     				} else if( rowCount > 1 ){
-    					// Récuperation d'un tableau de int qui contient les lignes selectionné
+    					// Recuperation d'un tableau de int qui contient les lignes selectionnï¿½
     					int []rowIdx = tableEvent.getSelectedRows();
-    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppréssion", 0) == 0){
+    					if(JOptionPane.showConfirmDialog(null, "Sur ?", "Suppression", 0) == 0){
     						for(int i = 0; i < rowCount; i++ )
     							bc.delete("events", "event_id = " + tableEvent.getValueAt(rowIdx[i], 0));
     					}
