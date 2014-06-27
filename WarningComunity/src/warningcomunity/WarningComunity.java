@@ -12,6 +12,7 @@ package warningcomunity;
  */
 import Plugins.Loader;
 import graphics.*;
+import java.io.File;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -26,7 +27,13 @@ public class WarningComunity {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
-        
+         String dossier="./Logs";
+         if(!new File(dossier).exists())
+        {
+            // Créer le dossier avec tous ses parents
+            new File(dossier).mkdirs();
+ 
+        }
         Login auth=new Login();
         boolean valide=false,continu=true ;
 
@@ -44,6 +51,7 @@ public class WarningComunity {
         if (valide)
         {   
             Loader.load();
+            
             Runnable r = new Runnable ()
                    {
                        public void run()  {
@@ -52,6 +60,8 @@ public class WarningComunity {
                    };
                    SwingUtilities.invokeLater(r);
                    Transmission server=new Transmission();    
+                   AutomateCheck bot = new AutomateCheck();
+                   bot.routine();
         }
         else
             System.exit(0);
