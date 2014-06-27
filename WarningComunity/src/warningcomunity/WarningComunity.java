@@ -26,15 +26,14 @@ public class WarningComunity {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, Exception {
          String dossier="./Logs";
          if(!new File(dossier).exists())
         {
             // Créer le dossier avec tous ses parents
             new File(dossier).mkdirs();
- 
         }
-        Login auth=new Login();
+        /*Login auth=new Login();
         boolean valide=false,continu=true ;
 
         auth.setVisible(true);
@@ -51,7 +50,7 @@ public class WarningComunity {
         if (valide)
         {   
             Loader.load();
-            
+           */ 
             Runnable r = new Runnable ()
                    {
                        public void run()  {
@@ -62,8 +61,8 @@ public class WarningComunity {
                    Transmission server=new Transmission();    
                    AutomateCheck bot = new AutomateCheck();
                    bot.routine();
-        }
+       /* }
         else
-            System.exit(0);
+            System.exit(0);*/
     }
 }
