@@ -199,9 +199,10 @@ public class BDDConnect {
 	if(champs.split(",").length > 1){
 	    String[] champ = champs.split(",");
 	    String[] val = value.split(",");
+            String up="";
 	    try
 	    {
-	      String up = "UPDATE " + table + " SET ";
+	      up = "UPDATE " + table + " SET ";
 	      
 	      int i = 0;
 	      for (i = 0; i < champ.length; i++) {
@@ -219,7 +220,7 @@ public class BDDConnect {
 	    }catch (ClassNotFoundException e){
 	      e.printStackTrace();
 	    }catch (SQLException e){
-	      System.out.println(e.getMessage());
+	      System.out.println(e.getMessage()+ "\n requete :"+up);
 	    }
 	}else{
 	    try {
