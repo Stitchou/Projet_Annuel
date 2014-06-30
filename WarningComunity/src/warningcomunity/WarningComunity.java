@@ -14,6 +14,7 @@ import Plugins.Loader;
 import graphics.*;
 import java.io.File;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -27,12 +28,16 @@ public class WarningComunity {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException, Exception {
+         ArrayList<String> namesplug = new ArrayList<String>();
+         ArrayList<String> names = new ArrayList<String>();
          String dossier="./Logs";
+         
          if(!new File(dossier).exists())
         {
             // Créer le dossier avec tous ses parents
             new File(dossier).mkdirs();
         }
+        
         /*Login auth=new Login();
         boolean valide=false,continu=true ;
 
@@ -48,9 +53,14 @@ public class WarningComunity {
         
         //Thread.sleep(1000);
         if (valide)
-        {   
+        { */
             Loader.load();
-           */ 
+           namesplug=Loader.names;
+            for (int i=0;i<namesplug.size();i++)
+            {
+                names.add(namesplug.get(i).substring(namesplug.get(i).indexOf(".")+1,namesplug.get(i).length()));
+                System.out.println(names.get(i));
+            }
             Runnable r = new Runnable ()
                    {
                        public void run()  {

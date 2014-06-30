@@ -20,7 +20,7 @@ import java.util.jar.JarFile;
 
 public class Loader {
     public static ArrayList<Gestionnaire> list=new ArrayList<>();
-    
+    public static ArrayList<String> names = new ArrayList<String>();
     public static void load()
     {
         try
@@ -72,6 +72,7 @@ public class Loader {
             }
             for(Class c : tabClass)
             {
+                names.add(c.getName());
                 Gestionnaire myGestionnaire=(Gestionnaire) Class.forName(c.getName(),true,cl).newInstance();
                 myGestionnaire.start();
                 list.add(myGestionnaire);
