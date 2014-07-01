@@ -38,7 +38,7 @@ public class WarningComunity {
             new File(dossier).mkdirs();
         }
         
-        /*Login auth=new Login();
+        Login auth=new Login();
         boolean valide=false,continu=true ;
 
         auth.setVisible(true);
@@ -53,7 +53,7 @@ public class WarningComunity {
         
         //Thread.sleep(1000);
         if (valide)
-        { */
+        { 
             Loader.load();
           
            
@@ -68,8 +68,8 @@ public class WarningComunity {
                    Transmission server=new Transmission();    
                    AutomateCheck bot = new AutomateCheck();
                    bot.routine();
-       /* }
+        }
         else
-            System.exit(0);*/
+            System.exit(0);
     }
 }

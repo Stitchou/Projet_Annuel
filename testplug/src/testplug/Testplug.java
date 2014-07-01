@@ -58,6 +58,8 @@ public class Testplug implements Plugins.Gestionnaire{
     
     private void stats()
     {
+        noms.clear();
+        nombre.clear();
         listUserEventsStats();
         for(int i =0;i<noms.size();i++)
         {
@@ -92,10 +94,10 @@ public class Testplug implements Plugins.Gestionnaire{
     }
     private void histogramme()
     {
+       
         int tableau[] = { 19, 3, 15, 7, 11, 9, 13, 5, 17, 1 };
 
       String sortie = " Relevé des Signalements ";
-
       // Pour chaque élément du tableau, afficher une barre d'histogramme.
       for ( int compteur = 0; compteur < nombre.size(); compteur++ ) {
          sortie += 
@@ -120,6 +122,8 @@ public class Testplug implements Plugins.Gestionnaire{
         JOptionPane.showMessageDialog( null, zoneSortie,
          "Programme d'affichage d'histogramme",
          JOptionPane.PLAIN_MESSAGE );
+        sortie = " Relevé des Signalements ";
     }
+    
     
 }
