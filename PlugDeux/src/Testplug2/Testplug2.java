@@ -4,25 +4,28 @@
  * and open the template in the editor.
  */
 
-package testplug;
+package Testplug2;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
+//import warningcomunity.*;
 import traitment.BDDConnect;
 import java.awt.Color; 
 import java.awt.Graphics; 
 import javax.swing.JFrame; 
+
 /**
  *
  * @author 626
  */
-public class Testplug implements Plugins.Gestionnaire{
+public class Testplug2 implements Plugins.Gestionnaire{
     private String name;
     ArrayList<String> noms = new ArrayList<String>();
     ArrayList<String> nombre = new ArrayList<String>();
         
-    public void Testplug()
+    public void PlugDeux()
     {
-        name="Testplug";
+        name="plugdeux";
         System.out.println("plug in construit ");
     }
     /**
@@ -195,3 +198,4 @@ public class Testplug implements Plugins.Gestionnaire{
 
     } 
 }
+

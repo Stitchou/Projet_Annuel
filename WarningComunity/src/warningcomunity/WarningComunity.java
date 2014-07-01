@@ -55,16 +55,13 @@ public class WarningComunity {
         if (valide)
         { */
             Loader.load();
-           namesplug=Loader.names;
-            for (int i=0;i<namesplug.size();i++)
-            {
-                names.add(namesplug.get(i).substring(namesplug.get(i).indexOf(".")+1,namesplug.get(i).length()));
-                System.out.println(names.get(i));
-            }
+          
+           
             Runnable r = new Runnable ()
                    {
                        public void run()  {
-                           new MyUI().setVisible(true);                         
+                           MyUI monUI=new MyUI(Loader.list,Loader.names);                          
+                           monUI.setVisible(true);                         
                        }
                    };
                    SwingUtilities.invokeLater(r);

@@ -72,9 +72,9 @@ public class Loader {
             }
             for(Class c : tabClass)
             {
-                names.add(c.getName());
+                System.out.println("classe chargee :"+c.getName());
+                names.add(c.getName().substring(c.getName().indexOf(".")+1));
                 Gestionnaire myGestionnaire=(Gestionnaire) Class.forName(c.getName(),true,cl).newInstance();
-                myGestionnaire.start();
                 list.add(myGestionnaire);
             }
         } catch (Exception e)
