@@ -5,13 +5,16 @@
  */
 
 package testplug;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import traitment.BDDConnect;
 import java.awt.Color; 
 import java.awt.Graphics; 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JFrame; 
-/**
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import traitment.BDDConnect;
+        /**
  *
  * @author 626
  */
@@ -60,8 +63,8 @@ public class Testplug implements Plugins.Gestionnaire{
         {
             System.out.println(noms.get(i)+" a signaler "+nombre.get(i));
         }
-        new Histogramme();
-        
+         
+        histogramme();
     }
     private void listUserEventsStats()
     {
@@ -87,111 +90,36 @@ public class Testplug implements Plugins.Gestionnaire{
                     e.printStackTrace();
             }
     }
-  
-    public class Histogramme extends JFrame 
+    private void histogramme()
+    {
+        int tableau[] = { 19, 3, 15, 7, 11, 9, 13, 5, 17, 1 };
 
-    { 
-        private static final long serialVersionUID = 1L; 
-        private int[] valeurs; 
-        private int max; 
-        private Color[] couleurs; 
-        private static final int DEC_X = 40; 
-        private static final int DEC_Y = 40; 
-        private static final int DEC_TX = DEC_X + 5; 
-        private static final int DEC_TY = DEC_Y + 2;
-        private static final int DEC_FH = 4; 
-        private static final int DEC_FL = 8; 
-        private static final int LG_B = 30;
-        private static final int INCR = 10; 
+      String sortie = " Relevé des Signalements ";
 
-        public Histogramme() 
-       { 
+      // Pour chaque élément du tableau, afficher une barre d'histogramme.
+      for ( int compteur = 0; compteur < nombre.size(); compteur++ ) {
+         sortie += 
+            "\n" + noms.get(compteur) + "\t" + nombre.get(compteur) + "\t";
 
-          super("Histogramme");
-          this.valeurs = new int[6];
-          this.valeurs[0] = 12; 
-          this.valeurs[1] = 10; 
-          this.valeurs[2] = 17; 
-          this.valeurs[3] = 5; 
-          this.valeurs[4] = 13; 
-          this.valeurs[5] = 8; 
-          this.max = 20;     
+         // Afficher la barre d'astérisques.
+        try
+        {
+            for ( int etoiles = 0; etoiles < Integer.parseInt(nombre.get(compteur)); etoiles++ )
+            sortie += "*";
+        }
+        catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+      }
+        UIManager UI=new UIManager();
+        UI.put("OptionPane.background", Color.white);
+        UI.put("Panel.background", Color.white);
+        JTextArea zoneSortie = new JTextArea();
+        zoneSortie.setText( sortie );
 
-          // Initialisation des couleurs. 
-
-          this.couleurs = new Color[6];
-          this.couleurs[0] = Color.RED;
-          this.couleurs[1] = Color.GREEN;
-          this.couleurs[2] = Color.BLUE;
-          this.couleurs[3] = Color.YELLOW;
-          this.couleurs[4] = Color.MAGENTA;
-          this.couleurs[5] = new Color(255, 102, 0);    
-
-          // Propriétés de la fenêtre. 
-
-          setLocation(50, 50); 
-          setSize(600, 300); 
-          setVisible(true); 
-          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-       } 
-
-        public void paint(Graphics g) 
-       { 
-          int x, y, x1, y1, x2, y2, largeur, hauteur; 
-          for(int i = 0; i < this.valeurs.length; i++) 
-          { 
-             x = DEC_X + i * (LG_B + 1); 
-             y = getHeight() - DEC_Y - this.valeurs[i] * INCR; 
-             largeur = LG_B; 
-             hauteur = this.valeurs[i] * INCR; 
-             g.setColor(this.couleurs[i]); 
-             g.fillRect(x, y, largeur, hauteur);
-             x = DEC_TX + i * (LG_B + 1); 
-             y = getHeight() - DEC_TY - this.valeurs[i] * INCR;
-             g.setColor(Color.BLACK); 
-             g.drawString("" + this.valeurs[i], x, y); 
-
-          } 
-
-     
-
-          // Affichage de l'axe X. 
-
-          g.setColor(Color.BLACK); 
-
-          x1 = DEC_X; 
-
-          y1 = getHeight() - DEC_Y; 
-
-          x2 = x1 + this.valeurs.length * LG_B + LG_B; 
-
-          y2 = y1; 
-
-          g.drawLine(x1, y1, x2, y2); 
-
-          g.drawLine(x2, y2, x2 - DEC_FL, y2 - DEC_FH); 
-
-          g.drawLine(x2, y2, x2 - DEC_FL, y2 + DEC_FH); 
-
-           
-
-          // Affichage de l'axe Y. 
-
-          x1 = DEC_X; 
-
-          y1 = getHeight() - DEC_Y; 
-
-          x2 = x1; 
-
-          y2 = y1 - this.max * INCR; 
-
-          g.drawLine(x1, y1, x2, y2); 
-
-          g.drawLine(x2, y2, x2 - DEC_FH, y2 + DEC_FL); 
-
-          g.drawLine(x2, y2, x2 + DEC_FH, y2 + DEC_FL); 
-
-    } 
-
-    } 
+        JOptionPane.showMessageDialog( null, zoneSortie,
+         "Programme d'affichage d'histogramme",
+         JOptionPane.PLAIN_MESSAGE );
+    }
+    
 }

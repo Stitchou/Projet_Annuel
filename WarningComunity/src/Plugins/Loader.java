@@ -42,7 +42,6 @@ public class Loader {
             int place=0;
             for(File f : listeFichier)
             {
-                System.out.println(f);
                 try
                 {
                     URL [] listeUrl = {f.toURL()};
@@ -79,7 +78,6 @@ public class Loader {
             place=0;
             for(Class c : tabClass)
             {
-                System.out.println("classe chargee :"+c.getName());
                 names.add(c.getName().substring(c.getName().indexOf(".")+1));
                 Gestionnaire myGestionnaire=(Gestionnaire) Class.forName(c.getName(),true,cl.get(place)).newInstance();
                 list.add(myGestionnaire);
