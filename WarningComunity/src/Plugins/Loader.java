@@ -23,6 +23,7 @@ public class Loader {
     public static ArrayList<String> names = new ArrayList<String>();
     public static void load()
     {
+        
         try
         {
             URLClassLoader search;
@@ -31,36 +32,40 @@ public class Loader {
             // liste des plugins
             File [] listeFichier = fichier.listFiles();
             //classe loarder
-            ClassLoader cl =null;
+            ArrayList<ClassLoader> cl =new ArrayList<ClassLoader>();
             // Liste denumeration 
             Enumeration enums;
             String name=null;
             Class nameClass=null;
             ArrayList<Class> tabClass = new ArrayList<Class>();
             //parcours de la lsite des pulgins
+            int place=0;
             for(File f : listeFichier)
             {
+                System.out.println(f);
                 try
                 {
                     URL [] listeUrl = {f.toURL()};
-                    cl= new URLClassLoader (listeUrl);
+                    cl.add( new URLClassLoader (listeUrl));
                     JarFile ficjar = new JarFile(f.getAbsolutePath());
                     enums=ficjar.entries();
                     // parcours de l'énumération 
+                    
                     while(enums.hasMoreElements())
-                    {
+                    {                       
                         name = enums.nextElement().toString();
                         if(name.length() > 6 && name.substring(name.length()-6).compareTo(".class") == 0) 
-                        {
+                        {                           
                             name = name.substring(0,name.length()-6);
                             name = name.replaceAll("/",".");
-                            nameClass = Class.forName(name ,true,cl);
+                            nameClass = Class.forName(name ,true,cl.get(place));
                             for(int i = 0 ; i < nameClass.getInterfaces().length; i ++ )
                             {
                                 boolean b = nameClass.getInterfaces()[i].toString().equals("interface Plugins.Gestionnaire");
                                 if(b) 
                                 {
                                     tabClass.add(nameClass);
+                                    break;
                                 }
                             }
                         }
@@ -69,13 +74,16 @@ public class Loader {
                     e.printStackTrace();
                     System.out.println();
                 }
+                place++;
             }
+            place=0;
             for(Class c : tabClass)
             {
                 System.out.println("classe chargee :"+c.getName());
                 names.add(c.getName().substring(c.getName().indexOf(".")+1));
-                Gestionnaire myGestionnaire=(Gestionnaire) Class.forName(c.getName(),true,cl).newInstance();
+                Gestionnaire myGestionnaire=(Gestionnaire) Class.forName(c.getName(),true,cl.get(place)).newInstance();
                 list.add(myGestionnaire);
+                place++;
             }
         } catch (Exception e)
         {
