@@ -39,7 +39,7 @@ public  boolean verifLogin()
     String login, mdp;
    
         login=jTextField3.getText();
-        mdp =jTextField1.getText();
+        mdp =String.valueOf(jTextField1.getPassword());
         BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
         String[] champs = {"COUNT(*)"};
         try {
@@ -98,7 +98,7 @@ public  boolean verifLogin()
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -213,7 +213,7 @@ public  boolean verifLogin()
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        valider=verifLogin();
        //System.out.println("retourrrrrrrrrrrr ..... "+valider);
-       this.setVisible(false);
+       if(valider)this.setVisible(false);
                
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -232,7 +232,7 @@ public  boolean verifLogin()
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField jTextField1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
