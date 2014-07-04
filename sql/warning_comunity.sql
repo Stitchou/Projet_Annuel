@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`users_id`, `nom`, `prenom`, `pseudo`, `mail`, `mdp`, `level`) VALUES
 (1, 'nadire', 'reda', 'red', 're@gg.com', 'md5', 1),
-(2, 'arnauve', 'yehouda', 'pedbear', 'yye@gg.com', 'md6', 1),
+(2, 'arnauve', 'yehouda', 'Yo911', 'yye@gg.com', 'md6', 1),
 (3, 'imbart', 'emerich', '626', 'sti@gg.com', 'sha256', 0),
 (4, 'toto44', 'titi', 'riri', 'fifi@gg.com', 'lol', 1);
 
