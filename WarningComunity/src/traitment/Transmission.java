@@ -27,9 +27,8 @@ public class Transmission
         String login=log, mdp=pass;
         System.out.println(" FIND ID :"+login+" pass:"+mdp);
         BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
-        String[] champs = {"users_id"};
         try {
-                sqlConnection.select("users", champs, "WHERE pseudo='"+login+"' AND mdp='"+mdp+"'");
+                sqlConnection.selectTwo("users", "users_id", "WHERE pseudo='"+login+"' AND mdp='"+mdp+"'");
                 
         } catch (Exception e) {
                 e.printStackTrace();
@@ -53,9 +52,8 @@ public class Transmission
         String login=log, mdp=pass;
        
         BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
-        String[] champs = {"COUNT(*)"};
         try {
-                sqlConnection.select("users", champs, "WHERE pseudo='"+login+"' AND mdp='"+mdp+"'");
+                sqlConnection.selectTwo("users", "COUNT(*)", "WHERE pseudo='"+login+"' AND mdp='"+mdp+"'");
                 
         } catch (Exception e) {
                 e.printStackTrace();
@@ -146,9 +144,8 @@ public class Transmission
         String nom="";
         ResultSet dataUser;
         BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
-        String[] champs = {"nom"};
         try {
-                sqlConnection.select("type_event", champs, "WHERE type_event="+id);
+                sqlConnection.selectTwo("type_event", "nom", "WHERE type_event="+id);
                 
         } catch (Exception e) {
                 e.printStackTrace();
