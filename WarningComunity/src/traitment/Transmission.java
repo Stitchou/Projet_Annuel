@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 
 public class Transmission
 {
+
     private void insertEvent ( String [] value)
     {
         BDDConnect sqlConnection = new BDDConnect("localhost:3306/warning_comunity","root","");
@@ -229,12 +230,12 @@ public class Transmission
             if(verifLogin(pseudo, pass))
             {
                 System.out.println("User Logged In :" + pseudo);
-                Calendar cal = Calendar.getInstance();
-                String msg=new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date())+" à "+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
-                save_connexion.ecrire("./Logs/users_list.txt", "Connection Users : "+pseudo+" le "+msg);
                 LoginNames.add(pseudo);
                 LoginPass.add(pass);
-                ClientSockets.add(ClientSocket);    
+                ClientSockets.add(ClientSocket);
+                save_connexion.ecrire2("./Logs/users_list.txt", "0&0&0");
+                for(int i=0;i<LoginNames.size();i++)
+                    save_connexion.ecrire("./Logs/users_list.txt", (i+1)+" & "+LoginNames.get(i).toString()+" & "+LoginPass.get(i).toString());     
                 start();
             }
         }
@@ -264,11 +265,11 @@ public class Transmission
                             {
                                 LoginNames.removeElementAt(iCount);
                                 ClientSockets.removeElementAt(iCount);
+                                save_connexion.ecrire2("./Logs/users_list.txt", "0&0&0");
+                                for(int i=0;i<LoginNames.size();i++)
+                                    save_connexion.ecrire("./Logs/users_list.txt", (i+1)+" & "+LoginNames.get(i).toString()+" & "+LoginPass.get(i).toString());  
                                 System.out.println("User " + Sendto +" Logged Out ...");
-                                Calendar cal = Calendar.getInstance();
-                                String msge=new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date())+" à "+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
-                                save_connexion.ecrire("./Logs/users_list.txt", "Deconnexion User : "+pseudo+" le "+msge);
-                                break;
+                               break;
                             }
                         }
                     }

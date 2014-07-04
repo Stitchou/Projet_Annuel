@@ -38,6 +38,25 @@ public class Logs {
 			System.out.println("Problème d'IO : "+ a.getMessage()+" "+path+" "+text);
 		}
 	}
+        public void ecrire2(String path, String text) 
+	{
+		PrintWriter ecri ;
+		try
+		{
+			ecri = new PrintWriter(new FileWriter(path,false));
+			ecri.println(text);
+			ecri.flush();
+			ecri.close();
+		}
+		catch (NullPointerException a)
+		{
+			System.out.println("Erreur : pointeur null");
+		}
+		catch (IOException a)
+		{
+			System.out.println("Problème d'IO : "+ a.getMessage()+" "+path+" "+text);
+		}
+	}
        public void clear (String path)
        {
     	   PrintWriter writer;

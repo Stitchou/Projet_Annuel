@@ -84,10 +84,10 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 		case "appli" :
 			Logs classLog = new Logs();
 			String[][] user_list;
-			String content = classLog.lire("./Logs/user_list.txt");
+			String content = classLog.lire("./Logs/users_list.txt");
 			if(content.equals(""))
 			{
-				user_list = new String[10][5];
+				user_list = new String[10][3];
 			}
 			else
 			{
@@ -101,7 +101,7 @@ public class TableModel extends DefaultTableModel implements TableModelListener 
 			
 			setDataVector(
 					user_list,
-					new Object[]{"N","Identifiant","Mot de passe","Date de connexion","Heure de connexion"});
+					new Object[]{"N","Identifiant","Mot de passe"});
 			addTableModelListener(this);
 			break;
 		}
