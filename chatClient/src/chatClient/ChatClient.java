@@ -38,6 +38,7 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
     private JRadioButton r2;
     private JRadioButton r3;
     private JRadioButton r4;
+    private JRadioButton n;
     private JRadioButton oui;
     private JRadioButton non;
 	JButton jbLeft = new JButton("<-- ");
@@ -54,6 +55,7 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
     JPanel jpRadio = new JPanel();
     JPanel nav = new JPanel();
     
+    String event_id;
     
     ChatClient(String LoginName,String chatwith) throws Exception {
         super(LoginName);
@@ -109,6 +111,7 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
         r2 = new JRadioButton("radio2");
         r3 = new JRadioButton("radio3");
         r4 = new JRadioButton("radio4");
+        n = new JRadioButton("nothing");
         
         oui = new JRadioButton("oui");
         non = new JRadioButton("non");
@@ -119,6 +122,7 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
         bg.add(r2);
         bg.add(r3);
         bg.add(r4);
+        bg.add(n);
         
         bgc.add(oui);
         bgc.add(non);
@@ -136,6 +140,7 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
         jpRadio.add(r2);
         jpRadio.add(r3);
         jpRadio.add(r4);
+        jpRadio.add(n);
 
         jp1.add(ta);
         jp1.add(tf);
@@ -204,24 +209,26 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
             	} else if(compName.equals("ct2")) { // LOCATION
                 	envoi += "&" + "LOCATION";
                     if( tf2.getText().toString().isEmpty() )
-                    	envoi += "&" + latitude + "&" + longitude + "&" + typeEvent ;
+                    	envoi += "&3&3";
                     else {
                     	envoi += "&" + tf2.getText().toString();
                     }
             	} else if(compName.equals("ct3")) { // CONFIRM
-            		envoi += "&" + "CONFIRM";
-	                if( oui.isSelected() )
-	                    envoi += "&1";
-
-	                if( non.isSelected() )
-	                    envoi += "&0";
-            		
+            		if( !event_id.isEmpty() ){
+	            		envoi += "&" + "CONFIRM";
+		                if( oui.isSelected() )
+		                    envoi += "&1";
+	
+		                if( non.isSelected() )
+		                    envoi += "&0";
+		                envoi += "&" + event_id;
+            		}
             	}
 
                 dout.writeUTF(envoi);
                 ta.append("\n" + LoginName + " Says:" + tf.getText().toString());
-                ta2.append("\n" + LoginName + " Says:" + tf.getText().toString());
-                ta3.append("\n" + LoginName + " Says:" + tf.getText().toString());
+                ta2.append("\n" + LoginName + " Says:" + tf2.getText().toString());
+                ta3.append("\n" + LoginName + " Says:" + tf3.getText().toString());
 
                 tf.setText("");
                 tf2.setText("");
@@ -252,9 +259,13 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
     public void run() {        
         while(true) {
             try {
-                ta.append( "\n" + sendTo + " Says :" + din.readUTF());
-                ta2.append( "\n" + sendTo + " Says :" + din.readUTF());
-                ta3.append( "\n" + sendTo + " Says :" + din.readUTF());
+            	String recoit = din.readUTF();
+            	String[] recep = recoit.split("&");
+            	if (recep[1].equals("LOCATION"))
+            		event_id = recep[recep.length - 1];
+                ta.append( "\n" + sendTo + " Says :" + recoit);
+                ta2.append( "\n" + sendTo + " Says :" + recoit);
+                ta3.append( "\n" + sendTo + " Says :" + recoit);
                 
             } catch(Exception ex) {
                 ex.printStackTrace();
