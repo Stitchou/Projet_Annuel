@@ -21,7 +21,7 @@ public class SocketSyncTask extends AsyncTask<String, Void, String>{
 	@Override
 	protected String doInBackground(String... params) {
 		try {
-	       s = new Socket("192.168.0.13", 4444);
+	       s = new Socket("10.0.2.2", 4444);
 	       dout = new DataOutputStream(s.getOutputStream()); 
 	       din = new DataInputStream(s.getInputStream());
 	       dout.writeUTF(params[0]);
