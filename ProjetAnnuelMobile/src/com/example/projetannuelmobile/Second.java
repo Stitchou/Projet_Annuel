@@ -90,31 +90,35 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 		 t = Toast.makeText(this, " Signalement Radar en cours ! \nLatitude : " + latitude +
 			 "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
+			asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&EVENTS&"+longitude+"&"+latitude+"&"+1);
 			break;
 		case R.id.accicents:
 			// instruction si on click sur le 2eme bouton
 			 t = Toast.makeText(this, " Signalement Accidents en cours ! \nLatitude : " + latitude
 			 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
+			asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&EVENTS&"+longitude+"&"+latitude+"&"+3);
 			break;
 		case R.id.controle:
 			// instruction si on click sur le 3eme bouton
 		 t = Toast.makeText(this, " Signalement Controle en cours ! \nLatitude : " + latitude
 		 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
+			asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&EVENTS&"+longitude+"&"+latitude+"&"+4);
 			break;
 		case R.id.bouchon:
 			// instruction si on click sur le 4eme bouton
 			 t = Toast.makeText(this, " Signalement Bouchon en cours ! \nLatitude : " + latitude
 			 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 				t.show();
+				asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&EVENTS&"+longitude+"&"+latitude+"&"+2);
 				break;
 		}
 	}
 
 	@Override
 	public void processFinish(String output) {
-		switch(output.substring(output.indexOf("&")))
+		switch(output.substring(output.indexOf("&")+1))
 		{
 		case "OK":
 			return;

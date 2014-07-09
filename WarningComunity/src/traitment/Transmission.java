@@ -227,7 +227,7 @@ public class Transmission
             if(verifLogin(pseudo, pass))
             {
                 System.out.println("User Logged In :" + pseudo);
-                dout.writeUTF(pseudo+"&ok");                            
+                dout.writeUTF(pseudo+"&OK");                            
                 LoginNames.add(pseudo);
                 LoginPass.add(pass);
                 ClientSockets.add(ClientSocket);
@@ -237,6 +237,7 @@ public class Transmission
                 start();
             }
             else{
+            	dout.writeUTF(pseudo+"&NOK");      
             	ClientSocket.close();
             }
             	
