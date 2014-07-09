@@ -79,7 +79,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			//Bouton Se connecter - Anonymous
 			case R.id.anonymous:
 				asyncTask=new SocketSyncTask();
-		        asyncTask.execute("Anonymous");
+		        asyncTask.execute("Anonymous& ");
 				i.putExtra("EXTRA_ID", "SOME DATAS");
 				startActivity(i);
 				break;
