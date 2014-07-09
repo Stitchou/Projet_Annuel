@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class Second extends Activity implements OnClickListener,
 		SocketSyncResponse {
@@ -30,6 +31,7 @@ public class Second extends Activity implements OnClickListener,
 	private double latitude;
 	private int id;
 	private String[] result;
+	private ToggleButton tgbutton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,26 @@ public class Second extends Activity implements OnClickListener,
 				Button b2 = (Button) findViewById(R.id.accicents);
 				Button b3 = (Button) findViewById(R.id.controle);
 				Button b4 = (Button) findViewById(R.id.bouchon);
+				tgbutton = (ToggleButton) findViewById(R.id.toggleButton1);
 				b1.setOnClickListener(this);
 				b2.setOnClickListener(this);
 				b3.setOnClickListener(this);
 				b4.setOnClickListener(this);
+				tgbutton.setOnClickListener(new OnClickListener() {
+					 
+		            @Override
+		            public void onClick(View v) {
+		                // TODO Auto-generated method stub
+		                 if (tgbutton.isChecked()) {
+		                	 timer = new Timer();
+		             		myTimerTask = new MyTimerTask();
+		                	 timer.schedule(myTimerTask, 1000, 30000);
+		                    } else {
+		 
+		                    	timer.cancel();
+		                    }
+		            }
+		        });
 			}
 		}
 

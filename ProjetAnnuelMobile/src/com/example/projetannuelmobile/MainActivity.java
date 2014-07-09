@@ -28,10 +28,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		Button connect = (Button)findViewById(R.id.connection);
 		Button inscription = (Button)findViewById(R.id.inscription);
-		Button anonymous = (Button)findViewById(R.id.anonymous);
 		connect.setOnClickListener(this);
 		inscription.setOnClickListener(this);
-		anonymous.setOnClickListener(this);
 		
 	}
 
@@ -73,13 +71,8 @@ public class MainActivity extends Activity implements OnClickListener {
                 Intent webRedirect = new Intent(Intent.ACTION_VIEW);
                 webRedirect.setData(Uri.parse("http://10.0.2.2/site_projetAnnuel/index.php?page=account"));
                 startActivity(webRedirect);
-				t.show();
 				break;
-			//Bouton Se connecter - Anonymous
-			case R.id.anonymous:
-				i.putExtra("LOGIN", "Anonymous& ");
-				startActivity(i);
-				break;
+			
 		}
 		
 		

@@ -97,14 +97,5 @@
         android:text="S&apos;inscrire"
         android:textSize="@dimen/text_dim" />
 
-    <Button
-        android:id="@+id/anonymous"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/inscription"
-        android:layout_below="@+id/inscription"
-        android:background="#FFFFFF"
-        android:text="Se connecter - Anonymous"
-        android:textSize="@dimen/text_dim_2" />
     
 </RelativeLayout>
