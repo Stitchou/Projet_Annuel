@@ -227,7 +227,8 @@ public class Transmission
             if(verifLogin(pseudo, pass))
             {
                 System.out.println("User Logged In :" + pseudo);
-                dout.writeUTF(pseudo+"&OK");                            
+                dout.writeUTF(pseudo+"&OK");
+                dout.flush();
                 LoginNames.add(pseudo);
                 LoginPass.add(pass);
                 ClientSockets.add(ClientSocket);
@@ -251,7 +252,13 @@ public class Transmission
                 try
                 {
                     String msgFromClient=new String();
-                    msgFromClient=din.readUTF();
+                    try{
+                    	msgFromClient=din.readUTF();
+                    }catch (EOFException e){
+                    	msgFromClient="";
+                    	e.printStackTrace();
+                    	break;
+                    }
                     StringTokenizer st=new StringTokenizer(msgFromClient,"&");
                     String Sendto=st.nextToken();                
                     String MsgType=st.nextToken();
@@ -267,6 +274,10 @@ public class Transmission
                             if(LoginNames.elementAt(iCount).equals(Sendto))
                             {
                                 LoginNames.removeElementAt(iCount);
+                                Socket tSoc=(Socket)ClientSockets.elementAt(iCount);
+                                DataOutputStream tdout=new DataOutputStream(tSoc.getOutputStream());
+                                tdout.writeUTF("ok&oui");
+                                tSoc.close();
                                 ClientSockets.removeElementAt(iCount);
                                 save_connexion.ecrire2("./Logs/users_list.txt", "0&0&0");
                                 for(int i=0;i<LoginNames.size();i++)
@@ -293,6 +304,10 @@ public class Transmission
                             if(LoginNames.elementAt(iCount).equals(Sendto))
                             {   
                                 i=findId(LoginNames.elementAt(iCount).toString(),LoginPass.elementAt(iCount).toString());
+                                Socket tSoc=(Socket)ClientSockets.elementAt(iCount);
+                                DataOutputStream tdout=new DataOutputStream(tSoc.getOutputStream());
+                                tdout.writeUTF("ok&oui"); 
+                                
                             }
                         }
                         // création des dates
@@ -373,6 +388,15 @@ public class Transmission
                                 case 1:
                                     updateEvent(msg[0]);
                                     break;
+                            }
+                            for(iCount=0;iCount<LoginNames.size();iCount++)
+                            {
+                                if(LoginNames.elementAt(iCount).equals(Sendto))
+                                {   
+                                    Socket tSoc=(Socket)ClientSockets.elementAt(iCount);
+                                    DataOutputStream tdout=new DataOutputStream(tSoc.getOutputStream());
+                                    tdout.writeUTF("ok&oui");    
+                                }
                             }
                         }catch(NumberFormatException e)
                         {

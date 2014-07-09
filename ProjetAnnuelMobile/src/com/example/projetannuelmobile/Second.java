@@ -148,11 +148,8 @@ public class Second extends Activity implements OnClickListener,
 	protected void eventsConfimation(String serverResponse) {
 		Toast t;
 		result = serverResponse.split("&");
-		t = Toast.makeText(this, serverResponse, Toast.LENGTH_LONG);
-		t.show();
+		
 		if (result[0].equals("LOCATION")) {
-			t = Toast.makeText(this, result[0], Toast.LENGTH_LONG);
-			t.show();
 			new AlertDialog.Builder(this)
 					.setTitle("Delete entry")
 					.setMessage(
@@ -188,29 +185,6 @@ public class Second extends Activity implements OnClickListener,
 		result = output.split("&");
 
 		switch (result[1]) {
-		case "LOCATION":
-			new AlertDialog.Builder(this)
-					.setTitle("Delete entry")
-					.setMessage(
-							"Voulez-vous confirmer l'évènement " + result[1]
-									+ " à " + result[2]
-									+ " de votre position ?")
-					.setPositiveButton(android.R.string.yes,
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									return;
-								}
-							})
-					.setNegativeButton(android.R.string.no,
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									return;
-								}
-							}).setIcon(android.R.drawable.ic_dialog_alert)
-					.show();
-			break;
 		case "OK":
 			return;
 		case "NOK":
