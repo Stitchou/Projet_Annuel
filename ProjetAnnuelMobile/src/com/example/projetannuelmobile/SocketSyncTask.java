@@ -1,6 +1,7 @@
 package com.example.projetannuelmobile;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,8 +12,9 @@ import android.util.Log;
 
 public class SocketSyncTask extends AsyncTask<String, Void, String>{
 	private String serverResponse = "false";
-	
+
 	private DataOutputStream dout;
+	private DataInputStream din;
 	public SocketSyncResponse delegate = null;
 	private BufferedReader br;
 	private Socket s;
@@ -20,16 +22,18 @@ public class SocketSyncTask extends AsyncTask<String, Void, String>{
 	protected String doInBackground(String... params) {
 		try {
 	       s = new Socket("10.0.2.2", 4444);
-	       dout = new DataOutputStream(s.getOutputStream());        
-	        dout.writeUTF(params[0]);
-	        dout.flush();
+	       dout = new DataOutputStream(s.getOutputStream()); 
+	       din = new DataInputStream(s.getInputStream());
+	       dout.writeUTF(params[0]);
+	       dout.flush();
+	       serverResponse = din.readUTF();
 	        
-	        BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-	     
-	        if((serverResponse = br.readLine()) != null)
-	        	Log.i("Server Answer", serverResponse);	        		
+//	       br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+//	     
+//	       if((serverResponse = br.readLine()) != null)
+//	    	   Log.i("Server Answer", serverResponse);	        		
 	        
-	        br.close();
+//	       br.close();
 		}catch(IOException e)
 		{
 			e.printStackTrace();
@@ -42,9 +46,9 @@ public class SocketSyncTask extends AsyncTask<String, Void, String>{
 		try {
 			dout.writeUTF(params[0]);
 			dout.flush();
-			if(!br.readLine().isEmpty())
-				serverResponse = br.readLine();
-			
+
+		    din = new DataInputStream(s.getInputStream());
+			serverResponse = din.readUTF();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
