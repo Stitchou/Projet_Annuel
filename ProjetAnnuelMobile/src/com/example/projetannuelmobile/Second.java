@@ -1,5 +1,8 @@
 package com.example.projetannuelmobile;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +21,11 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 
  private SocketSyncTask asyncTask;
  private String datas;
+ Timer timer;
+ MyTimerTask myTimerTask;
+ private double longitude;
+ private double latitude;
+ private int id;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +35,7 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 			datas = extras.getString("LOGIN");
 			if (datas != null) {
 				 asyncTask = new SocketSyncTask();
-				 asyncTask.delegate = this;
+				 asyncTask.delegate=this;
 			     asyncTask.execute(datas);
 				 Button b1 = (Button)findViewById(R.id.radars);
 				 Button b2 = (Button)findViewById(R.id.accicents);
@@ -39,6 +47,11 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 				 b4.setOnClickListener(this);
 			}
 		}
+
+		timer = new Timer();
+	    myTimerTask = new MyTimerTask();
+	    
+		timer.schedule(myTimerTask, 1000, 30000);
 		// id = (Integer) getIntent().getExtras().get("id");
 	}
 
@@ -58,12 +71,23 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 	    }
 	    return super.onKeyDown(keyCode, event);
 	}
-	
-	private double longitude;
-	private double latitude;
-	private int id;
-	
+	 class MyTimerTask extends TimerTask {
 
+		  @Override
+		  public void run() {
+		  
+		   
+		   runOnUiThread(new Runnable(){
+
+		    @Override
+		    public void run() {
+		    	asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&LOCATION&"+longitude+"&"+latitude);
+		    }});
+		  }
+		  
+		 }
+	
+	
 	
  
 	
@@ -119,6 +143,9 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 
 	@Override
 	public void processFinish(String output) {
+		Toast t;
+		 t = Toast.makeText(this, output, Toast.LENGTH_LONG);
+	     t.show();
 		switch(output.substring(output.indexOf("&")+1))
 		{
 		case "OK":

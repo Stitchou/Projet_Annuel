@@ -49,7 +49,7 @@ public class SocketSyncTask extends AsyncTask<String, Void, String>{
         
 	}
 	protected void onPostExecute(String result) {
-		//delegate.processFinish(result);
+		delegate.processFinish(result);
 	}
 	protected void onPreExecute() {
 	   //Start
