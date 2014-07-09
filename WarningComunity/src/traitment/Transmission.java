@@ -227,6 +227,7 @@ public class Transmission
             if(verifLogin(pseudo, pass))
             {
                 System.out.println("User Logged In :" + pseudo);
+                dout.writeUTF(pseudo+"&ok");                            
                 LoginNames.add(pseudo);
                 LoginPass.add(pass);
                 ClientSockets.add(ClientSocket);
@@ -235,6 +236,10 @@ public class Transmission
                     save_connexion.ecrire("./Logs/users_list.txt", (i+1)+" & "+LoginNames.get(i).toString()+" & "+LoginPass.get(i).toString());     
                 start();
             }
+            else{
+            	ClientSocket.close();
+            }
+            	
         }
 
         public void run()
