@@ -123,7 +123,5 @@ public class Testplug implements Plugins.Gestionnaire{
          "Programme d'affichage d'histogramme",
          JOptionPane.PLAIN_MESSAGE );
         sortie = " Relevé des Signalements ";
-    }
-    
-    
+    }    
 }
