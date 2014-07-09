@@ -76,8 +76,8 @@
         android:id="@+id/bouchon"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/autres"
-        android:layout_below="@+id/autres"
+        android:layout_alignLeft="@+id/controle"
+        android:layout_below="@+id/controle"
         android:background="#FFFFFF"
         android:text="Bouchon" />
     
