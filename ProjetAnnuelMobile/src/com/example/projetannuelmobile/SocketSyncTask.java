@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -23,14 +21,13 @@ public class SocketSyncTask extends AsyncTask<String, Void, String>{
 	        dout.writeUTF(params[0]);
 	        dout.flush();
 	        
-	       /* BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-	        while(true)
-	        {
-	        	if((serverResponse = br.readLine()) != null)
-	        		Log.i("Server Answer", serverResponse);
-	        		break;
-	        }
-	        br.close();*/
+	        BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+	     
+	        if((serverResponse = br.readLine()) != null)
+	        	Log.i("Server Answer", serverResponse);
+	        		
+	        
+	        br.close();
 		}catch(IOException e)
 		{
 			e.printStackTrace();

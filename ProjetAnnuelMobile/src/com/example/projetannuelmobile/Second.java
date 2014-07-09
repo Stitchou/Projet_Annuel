@@ -144,13 +144,14 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 	@Override
 	public void processFinish(String output) {
 		Toast t;
-		 t = Toast.makeText(this, output, Toast.LENGTH_LONG);
-	     t.show();
+		 
 		switch(output.substring(output.indexOf("&")+1))
 		{
 		case "OK":
 			return;
 		case "NOK":
+			t = Toast.makeText(this, "Login et/ou mot de passe incorrect", Toast.LENGTH_LONG);
+		     t.show();
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
 		default:
