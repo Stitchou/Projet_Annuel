@@ -72,22 +72,28 @@ public class Second extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.radars:
 			// instruction si on click sur le 1er bouton
-		 t = Toast.makeText(this, " 1er BOUTON \nLatitude : " + latitude +
+		 t = Toast.makeText(this, " Signalement Radar en cours ! \nLatitude : " + latitude +
 			 "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
 		case R.id.accicents:
 			// instruction si on click sur le 2eme bouton
-			 t = Toast.makeText(this, " 2eme BOUTON \nLatitude : " + latitude
+			 t = Toast.makeText(this, " Signalement Accidents en cours ! \nLatitude : " + latitude
 			 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
 		case R.id.autres:
 			// instruction si on click sur le 3eme bouton
-		 t = Toast.makeText(this, " 3eme BOUTON \nLatitude : " + latitude
+		 t = Toast.makeText(this, " Signalement Controle en cours ! \nLatitude : " + latitude
 		 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
 			t.show();
 			break;
+		case R.id.Button01:
+			// instruction si on click sur le 4eme bouton
+			 t = Toast.makeText(this, " Signalement Bouchon en cours ! \nLatitude : " + latitude
+			 + "\nLongitude : " + longitude, Toast.LENGTH_LONG);
+				t.show();
+				break;
 		}
 	}
 }

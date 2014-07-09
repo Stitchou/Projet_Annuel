@@ -232,6 +232,7 @@ int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable cars 0x7f020057
 int drawable ic_launcher 0x7f020058
 int drawable ic_launcher_wc 0x7f020059
+int id Button01 0x7f050048
 int id TextView01 0x7f050041
 int id accicents 0x7f050045
 int id action_bar 0x7f05001c
@@ -245,7 +246,7 @@ int id action_context_bar 0x7f05001d
 int id action_menu_divider 0x7f050016
 int id action_menu_presenter 0x7f050017
 int id action_mode_close_button 0x7f050024
-int id action_settings 0x7f050048
+int id action_settings 0x7f050049
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id anonymous 0x7f050043
@@ -353,7 +354,7 @@ int string abc_searchview_description_voice 0x7f0a0008
 int string abc_shareactionprovider_share_with 0x7f0a000c
 int string abc_shareactionprovider_share_with_application 0x7f0a000b
 int string action_settings 0x7f0a000e
-int string app_name 0x7f0a000d
+int string appName 0x7f0a000d
 int string hello_world 0x7f0a000f
 int string signaler 0x7f0a0011
 int string text_view_acceuil 0x7f0a0010
