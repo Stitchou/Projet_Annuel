@@ -4,7 +4,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,11 +23,12 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 
  private SocketSyncTask asyncTask;
  private String datas;
- Timer timer;
- MyTimerTask myTimerTask;
+ private Timer timer;
+ private MyTimerTask myTimerTask;
  private double longitude;
  private double latitude;
  private int id;
+ private String [] result;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +55,7 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 	    myTimerTask = new MyTimerTask();
 	    
 		timer.schedule(myTimerTask, 1000, 30000);
-		// id = (Integer) getIntent().getExtras().get("id");
+		
 	}
 
 	@Override
@@ -82,6 +85,7 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 		    @Override
 		    public void run() {
 		    	asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&LOCATION&"+longitude+"&"+latitude);
+		    	eventsConfimation(asyncTask.getServerResponse());
 		    }});
 		  }
 		  
@@ -133,17 +137,38 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 				break;
 		}
 	}
-
+	protected void eventsConfimation(String serverResponse){
+		Toast t;
+		result = serverResponse.split("&");
+		t = Toast.makeText(this, serverResponse, Toast.LENGTH_LONG);
+	    t.show();
+		if(result[0].equals("LOCATION"))
+		{
+			t = Toast.makeText(this, result[0], Toast.LENGTH_LONG);
+		    t.show();
+			new AlertDialog.Builder(this)
+		    .setTitle("Delete entry")
+		    .setMessage("Voulez-vous confirmer l'évènement "+result[1]+" à "+result[2]+" de votre position ?")
+		    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		        	asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&CONFIRM&"+1+"&"+result[3]);
+		        }
+		     })
+		    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		        	asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&CONFIRM&"+0+"&"+result[3]);
+		        }
+		     })
+		    .setIcon(android.R.drawable.ic_dialog_alert)
+		     .show();
+		}
+		
+	}
 	@Override
 	public void processFinish(String output) {
 		Toast t;
-		String [] result = output.split("&");
-		if(result[0].equals("LOCATION"))
-		{
-			
-		}
-		else
-		{
+		result = output.split("&");
+		
 			switch(result[1])
 			{
 			case "OK":
@@ -153,10 +178,10 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 			     t.show();
 				Intent i = new Intent(this, MainActivity.class);
 				startActivity(i);
+				
 			default:
 				return;
 			}
-		}
 		
 	}
 }
