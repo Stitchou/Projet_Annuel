@@ -149,6 +149,7 @@ public class Second extends Activity implements OnClickListener,
 		Toast t;
 		result = serverResponse.split("&");
 		
+		
 		if (result[0].equals("LOCATION")) {
 			new AlertDialog.Builder(this)
 					.setTitle("Delete entry")

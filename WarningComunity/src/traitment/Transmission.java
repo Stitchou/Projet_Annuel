@@ -368,6 +368,19 @@ public class Transmission
                                 }
                             }
                         }
+                        else
+                        {
+	                        for(iCount=0;iCount<LoginNames.size();iCount++)
+	                        {
+	                            if(LoginNames.elementAt(iCount).equals(Sendto))
+	                            {   
+	                                Socket tSoc=(Socket)ClientSockets.elementAt(iCount);
+	                                DataOutputStream tdout=new DataOutputStream(tSoc.getOutputStream());
+	                                tdout.writeUTF("ok&oui");                            
+	                                break;
+	                            }
+	                        }
+                        }
                     }
                     else if(MsgType.equals("CONFIRM"))// reponse sspécifique à l'envoyeur
                     {
@@ -380,13 +393,13 @@ public class Transmission
                         }
                         try
                         {
-                            i=Integer.parseInt(msg[1]);
+                            i=Integer.parseInt(msg[0]);
                             switch (i){
                                 case 0:
-                                    deleteEvent(msg[0]);
+                                    deleteEvent(msg[1]);
                                     break;
                                 case 1:
-                                    updateEvent(msg[0]);
+                                    updateEvent(msg[1]);
                                     break;
                             }
                             for(iCount=0;iCount<LoginNames.size();iCount++)
