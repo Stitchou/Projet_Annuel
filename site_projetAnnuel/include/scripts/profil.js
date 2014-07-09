@@ -14,3 +14,18 @@ function delSignalement( id ){
 		}
 	})
 }
+
+function delUser( id ){
+	var data = {};
+	data['param'] = {};
+	data['table'] = 'users';
+	data['param']['users_id'] = id;
+	$.ajax({
+		data : data,
+		url : 'include/data/delete.php',
+		method : 'POST',
+		success : function(){
+			$( ['#event_', id].join('') ).fadeOut(100);
+		}
+	})
+}

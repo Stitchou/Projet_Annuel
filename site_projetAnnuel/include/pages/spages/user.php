@@ -1,4 +1,5 @@
 <?php
+	$jsDependencies[] = "include/scripts/profil.js";
 	$ths = array(
 			"pseudo",
 			"nom",
@@ -28,7 +29,7 @@
 						echo '<td>' . $d[$th] . '</td>';
 					}
 				?>
-				<td></td>
+				<td><a onclick="delUser(<?php echo $d['users_id'] ?>); return false;" ><img src="img/icon/croix.png" /></a></td>
 			</tr>
 			<?php
 		}

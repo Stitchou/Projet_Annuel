@@ -8,10 +8,6 @@
 				$param[$k] = $v;
 		}
 		insert_into('users', $param);
-		$_SESSION['id'] = $d['id'];
-		$_SESSION['pseudo'] = $d['pseudo'];
-		$_SESSION['mail'] = $d['mail'];
-		$_SESSION['lvl'] = 1;
 		redirection('index.php');
 	}
 
@@ -76,7 +72,6 @@
 		<fieldset class="field" style="width: 300px;" >
 			<h4>Inscription</h4>
 			<form method="post" action="" class="inscription" >
-				<input type="hidden" name="actif" value="1" />
 				<table border="0" >
 				<tr><td><label for="pseudo"  ><b>pseudo : </b>		</label>	</td> <td><input type="text" name="pseudo" value="<?php echo ( !empty($_POST['pseudo']) ) ? $_POST['pseudo'] : '' ?>" id="pseudo" /></td></tr>
 				<tr><td><label for="nom"  ><b>nom : </b>			</label>	</td> <td><input type="text" name="nom" value="<?php echo ( !empty($_POST['nom']) ) ? $_POST['nom'] : '' ?>" id="nom" /></td></tr>
