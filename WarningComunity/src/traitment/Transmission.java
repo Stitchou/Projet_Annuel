@@ -342,7 +342,7 @@ public class Transmission
                                 {   
                                     Socket tSoc=(Socket)ClientSockets.elementAt(iCount);
                                     DataOutputStream tdout=new DataOutputStream(tSoc.getOutputStream());
-                                    tdout.writeUTF(nomEvent+"&"+resultat[3]+" m&"+resultat[4]);                            
+                                    tdout.writeUTF("LOCATION&"+nomEvent+"&"+resultat[3]+" m&"+resultat[4]);                            
                                     break;
                                 }
                             }
