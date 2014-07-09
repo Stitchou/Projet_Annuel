@@ -3,6 +3,8 @@ package com.example.projetannuelmobile;
 import java.sql.ResultSet;
 
 import com.example.projetannuelmobile.Second;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -21,7 +23,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	private static final Context MainActivity = null;
 	Bundle objetbunble = new Bundle();
 
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -34,7 +35,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 	}
 
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -42,7 +42,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	
-	@Override
 	public void onClick(View v) {
 		EditText et1 = (EditText) findViewById(R.id.editText1);
 		EditText et2 = (EditText) findViewById(R.id.editText2);
@@ -73,7 +72,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			//Bouton S'inscrire
 			case R.id.inscription :
 				//Renvoi vers site web 
-				t = Toast.makeText(this,"Bouton non fonctionnel", Toast.LENGTH_LONG );
+				//t = Toast.makeText(this,"Bouton non fonctionnel", Toast.LENGTH_LONG );
+                Intent webRedirect = new Intent(Intent.ACTION_VIEW);
+                webRedirect.setData(Uri.parse("http://10.0.2.2/site_projetAnnuel/index.php?page=account"));
+                startActivity(webRedirect);
 				t.show();
 				break;
 			//Bouton Se connecter - Anonymous
