@@ -232,7 +232,6 @@ int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable cars 0x7f020057
 int drawable ic_launcher 0x7f020058
 int drawable ic_launcher_wc 0x7f020059
-int id Button01 0x7f050048
 int id TextView01 0x7f050041
 int id accicents 0x7f050045
 int id action_bar 0x7f05001c
@@ -250,11 +249,12 @@ int id action_settings 0x7f050049
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id anonymous 0x7f050043
-int id autres 0x7f050044
 int id beginning 0x7f050011
+int id bouchon 0x7f050048
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
 int id connection 0x7f05003d
+int id controle 0x7f050044
 int id default_activity_button 0x7f050028
 int id dialog 0x7f05000e
 int id disableHome 0x7f050008

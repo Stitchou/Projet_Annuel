@@ -12,7 +12,9 @@ import android.util.Log;
 
 public class SocketSyncTask extends AsyncTask<String, Void, String>{
 	private String serverResponse = "false";
+	
 	private DataOutputStream dout;
+	public SocketSyncResponse delegate = null;
 	@Override
 	protected String doInBackground(String... params) {
 		try {
@@ -47,7 +49,7 @@ public class SocketSyncTask extends AsyncTask<String, Void, String>{
         
 	}
 	protected void onPostExecute(String result) {
-	     //Post execute
+		//delegate.processFinish(result);
 	}
 	protected void onPreExecute() {
 	   //Start
