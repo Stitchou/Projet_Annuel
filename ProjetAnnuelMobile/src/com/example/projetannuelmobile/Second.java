@@ -30,9 +30,11 @@ public class Second extends Activity implements OnClickListener {
 				 Button b1 = (Button)findViewById(R.id.radars);
 				 Button b2 = (Button)findViewById(R.id.accicents);
 				 Button b3 = (Button)findViewById(R.id.autres);
+				 Button b4 = (Button)findViewById(R.id.Button01);
 				 b1.setOnClickListener(this);
 				 b2.setOnClickListener(this);
 				 b3.setOnClickListener(this);
+				 b4.setOnClickListener(this);
 			}
 		}
 		// id = (Integer) getIntent().getExtras().get("id");
