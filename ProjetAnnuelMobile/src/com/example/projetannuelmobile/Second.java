@@ -6,6 +6,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,16 +15,18 @@ import android.widget.Toast;
 
 public class Second extends Activity implements OnClickListener {
 
-
+ private SocketSyncTask asyncTask;
+ private String datas;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_second);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			String datas = extras.getString("EXTRA_ID");
+			datas = extras.getString("LOGIN");
 			if (datas != null) {
-
+				 asyncTask = new SocketSyncTask();
+			     asyncTask.execute(datas);
 				 Button b1 = (Button)findViewById(R.id.radars);
 				 Button b2 = (Button)findViewById(R.id.accicents);
 				 Button b3 = (Button)findViewById(R.id.autres);
@@ -42,6 +45,15 @@ public class Second extends Activity implements OnClickListener {
 		return true;
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+	    if ((keyCode == KeyEvent.KEYCODE_BACK))
+	    {
+	        asyncTask.onProgressUpdate(datas.substring(0,datas.indexOf("&"))+"&LOGOUT");
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
 	
 	private double longitude;
 	private double latitude;
@@ -49,7 +61,7 @@ public class Second extends Activity implements OnClickListener {
 	
 
 	
-
+ 
 	
 	@Override
 	public void onClick(View v) {

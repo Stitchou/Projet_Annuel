@@ -53,15 +53,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		String mdp = ed2.toString();
 		Intent i = new Intent(this, Second.class);
 		Toast t = null;
-		SocketSyncTask asyncTask;
 		switch(v.getId())
 		{
 			//Bouton Se connecter
 			case R.id.connection :
 				//Envoie par socket le login et mdp entré
-				asyncTask = new SocketSyncTask();
-			    asyncTask.execute(login+"&"+mdp);
-				i.putExtra("EXTRA_ID", "SOME DATAS");
+				i.putExtra("LOGIN", login+"&"+mdp);
 				startActivity(i);
 				break;
 				/*else
@@ -80,9 +77,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				break;
 			//Bouton Se connecter - Anonymous
 			case R.id.anonymous:
-				asyncTask=new SocketSyncTask();
-		        asyncTask.execute("Anonymous& ");
-				i.putExtra("EXTRA_ID", "SOME DATAS");
+				i.putExtra("LOGIN", "Anonymous& ");
 				startActivity(i);
 				break;
 		}
