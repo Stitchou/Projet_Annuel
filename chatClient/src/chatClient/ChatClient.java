@@ -214,13 +214,14 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
                     	envoi += "&" + tf2.getText().toString();
                     }
             	} else if(compName.equals("ct3")) { // CONFIRM
-            		if( !event_id.isEmpty() ){
+            		if( !event_id.equals("") ){
 	            		envoi += "&" + "CONFIRM";
 		                if( oui.isSelected() )
 		                    envoi += "&1";
 	
 		                if( non.isSelected() )
 		                    envoi += "&0";
+                                System.out.println(" Event ID "+event_id);
 		                envoi += "&" + event_id;
             		}
             	}
@@ -261,8 +262,10 @@ class ChatClient extends JFrame implements Runnable, ActionListener {
             try {
             	String recoit = din.readUTF();
             	String[] recep = recoit.split("&");
-            	if (recep[1].equals("LOCATION"))
+                System.out.println(" recep "+recep[0]);
+            	if (recep[0].equals("LOCATION"))
             		event_id = recep[recep.length - 1];
+                System.out.println(" Event ID "+event_id);
                 ta.append( "\n" + sendTo + " Says :" + recoit);
                 ta2.append( "\n" + sendTo + " Says :" + recoit);
                 ta3.append( "\n" + sendTo + " Says :" + recoit);
