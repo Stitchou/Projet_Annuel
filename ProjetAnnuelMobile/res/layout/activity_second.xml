@@ -10,7 +10,7 @@
     tools:context=".Second" >
 
     <Button
-        android:id="@+id/autres"
+        android:id="@+id/controle"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/accicents"
@@ -73,7 +73,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/bouchon"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/autres"
