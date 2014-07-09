@@ -27,6 +27,7 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 			datas = extras.getString("LOGIN");
 			if (datas != null) {
 				 asyncTask = new SocketSyncTask();
+				 asyncTask.delegate = this;
 			     asyncTask.execute(datas);
 				 Button b1 = (Button)findViewById(R.id.radars);
 				 Button b2 = (Button)findViewById(R.id.accicents);
@@ -122,9 +123,11 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 		{
 		case "OK":
 			return;
-		default:
+		case "NOK":
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
+		default:
+			return;
 		}
 		
 	}
