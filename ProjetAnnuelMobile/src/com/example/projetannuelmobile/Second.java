@@ -97,18 +97,11 @@ public class Second extends Activity implements OnClickListener, SocketSyncRespo
 		 * // TODO Auto-generated method stub
 		 */
 		Toast t;
-	
-		LocationManager lmo = (LocationManager)getSystemService(Context.LOCATION_SERVICE) ;
-		Location l = lmo.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		LocationListener llo = new LocationManagerHelper() {
-			@Override
-			public void onLocationChanged(Location lc) {
-				super.onLocationChanged(lc); // On execute la méthode parente
 
-				latitude = LocationManagerHelper.getLatitude();
-				longitude = LocationManagerHelper.getLongitude();
-			}
-		};
+		GPSTracker gps = new GPSTracker(this);
+		latitude = gps.getLatitude();
+		longitude = gps.getLongitude();
+		
 		switch (v.getId()) {
 		case R.id.radars:
 			// instruction si on click sur le 1er bouton
